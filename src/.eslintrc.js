@@ -1,0 +1,35 @@
+module.exports = {
+  'parser': 'babel-eslint',
+  'extends': 'airbnb',
+  'plugins': [
+      'import',
+      'jsx-a11y',
+      'react',
+  ],
+  'rules': {
+    'semi': ['off', 'never', {
+      'omitLastInOneLineBlock': true,
+    }],
+    'arrow-body-style': [0],
+    'class-methods-use-this': [0, { 'exceptMethods': [] }],
+    'indent': ['error', 2],
+    'jsx-quotes': ['error', 'prefer-single'],
+    'max-len': ['error', { 'code': 120 }],
+    'no-alert': [0],
+    'no-console': [0],
+    'no-unused-vars': ['error', { 'argsIgnorePattern': '[rR]eplace' }],
+    'prefer-destructuring': [0],
+    'prefer-template': [0],
+    'quotes': ['error', 'single', { 'avoidEscape': true }],
+    'react/destructuring-assignment': [0],
+    'react/jsx-filename-extension': [1, { 'extensions': ['.js', '.jsx'] }],
+    'react/jsx-one-expression-per-line': [0],
+    'react/no-unescaped-entities': [0],
+    'react/prefer-stateless-function': [0],
+    'react/prop-types': [0],
+  },
+  'env': {
+    'browser': true,
+    'node': true,
+  },
+}
