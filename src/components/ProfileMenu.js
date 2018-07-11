@@ -2,25 +2,69 @@ import React from 'react'
 import {
   Avatar,
   Dropdown,
-  Icon,
   Menu,
 } from 'antd'
+import {
+  A,
+  Span,
+} from 'glamorous'
 
-const menu = (
+const ProfileDropdownMenu = (
   <Menu>
     <Menu.Item key='0'>
-      <a href='http://www.alipay.com/'>1st menu item</a>
+      Profile
     </Menu.Item>
     <Menu.Item key='1'>
-      <a href='http://www.taobao.com/'>2nd menu item</a>
+      Settings
     </Menu.Item>
     <Menu.Divider />
-    <Menu.Item key='3'>3rd menu item</Menu.Item>
+    <Menu.Item key='3'>
+      Logout
+    </Menu.Item>
   </Menu>
 )
 
+const ProfileNotLoggedIn = (
+  <div>
+
+    <A
+      href='#signup'
+      fontSize='1rem'
+      fontWeight='bold'
+    >
+      Sign Up
+    </A>
+    <Span color='#ccc'> | </Span>
+    <A
+      href='#login'
+      fontSize='1rem'
+      fontWeight='bold'
+    >
+      Log In
+    </A>
+  </div>
+)
+
 export default class ProfileMenu extends React.Component {
+  constructor() {
+    super()
+    this.auth = false
+  }
+
   render() {
+    let ProfileMenuContent
+
+    if (this.auth) {
+      ProfileMenuContent = (
+        <Dropdown overlay={ProfileDropdownMenu} placement='bottomRight' trigger={['click']}>
+          <div>
+            <Avatar size='large' icon='user' />
+          </div>
+        </Dropdown>
+      )
+    } else {
+      ProfileMenuContent = ProfileNotLoggedIn
+    }
     return (
       <div
         className='gnb profile menu'
@@ -28,12 +72,7 @@ export default class ProfileMenu extends React.Component {
           textAlign: 'right',
         }}
       >
-        <Dropdown overlay={menu} placement='bottomRight' trigger={['click']}>
-          <div>
-            <Avatar size='large' icon='user' />
-            <Icon type='caret-down' style={{ color: '#ccc', marginLeft: '10px' }} />
-          </div>
-        </Dropdown>
+        { ProfileMenuContent }
       </div>
     )
   }

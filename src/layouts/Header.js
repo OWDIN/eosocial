@@ -23,7 +23,7 @@ const HeaderWrapper = () => {
               EOSocial <sub>beta</sub>
             </div>
           </Col>
-          <Col span={16}>
+          <Col span={17}>
             <Menu
               className='gnb'
               theme='light'
@@ -35,7 +35,7 @@ const HeaderWrapper = () => {
               <Menu.Item key='3'><Icon type='info-circle-o' /> Info</Menu.Item>
             </Menu>
           </Col>
-          <Col span={4}>
+          <Col span={3}>
             <ProfileMenu />
           </Col>
         </Row>
