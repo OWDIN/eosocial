@@ -1,11 +1,13 @@
 import React from 'react'
 import {
+  NavLink,
+} from 'react-router-dom'
+import {
   Avatar,
   Dropdown,
   Menu,
 } from 'antd'
 import {
-  A,
   Span,
 } from 'glamorous'
 
@@ -25,23 +27,23 @@ const ProfileDropdownMenu = (
 )
 
 const ProfileNotLoggedIn = (
-  <div>
-
-    <A
-      href='#signup'
-      fontSize='1rem'
-      fontWeight='bold'
+  <div
+    style={{
+      fontSize: '1rem',
+      fontWeight: 'bold',
+    }}
+  >
+    <NavLink
+      to='/signup'
     >
       Sign Up
-    </A>
+    </NavLink>
     <Span color='#ccc'> | </Span>
-    <A
-      href='#login'
-      fontSize='1rem'
-      fontWeight='bold'
+    <NavLink
+      to='/login'
     >
       Log In
-    </A>
+    </NavLink>
   </div>
 )
 

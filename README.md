@@ -34,6 +34,15 @@ $ docker logs -f nodeos
 $ curl localhost:8888/v1/chain/get_info
 ```
 
+Generate Testnet token and push smart contract:
+
+```bash
+# alias for cleos
+$ alias cleos='docker exec nodeos /opt/eosio/bin/cleos --wallet-url http://localhost:8888'
+
+
+```
+
 Start React Project like below:
 
 ```bash

@@ -1,5 +1,8 @@
 import React from 'react'
 import {
+  NavLink,
+} from 'react-router-dom'
+import {
   Icon,
   Layout,
   Menu,
@@ -19,8 +22,10 @@ const HeaderWrapper = () => {
         <Row gutter={16}>
           <Col span={4}>
             <div className='logo'>
-              <Icon type='link' style={{ marginRight: '6px' }} />
-              EOSocial <sub>beta</sub>
+              <NavLink to='/'>
+                <Icon type='link' style={{ marginRight: '6px' }} />
+                EOSocial <sub>beta</sub>
+              </NavLink>
             </div>
           </Col>
           <Col span={17}>
@@ -30,9 +35,15 @@ const HeaderWrapper = () => {
               mode='horizontal'
               defaultSelectedKeys={['1']}
             >
-              <Menu.Item key='1'><Icon type='home' /> Feed</Menu.Item>
-              <Menu.Item key='2' disabled><Icon type='line-chart' /> Trending</Menu.Item>
-              <Menu.Item key='3'><Icon type='info-circle-o' /> Info</Menu.Item>
+              <Menu.Item key='1'>
+                <NavLink to='/'><Icon type='home' /> Feed</NavLink>
+              </Menu.Item>
+              <Menu.Item key='2' disabled>
+                <NavLink to='/trending'><Icon type='line-chart' /> Trending</NavLink>
+              </Menu.Item>
+              <Menu.Item key='3'>
+                <NavLink to='/info'><Icon type='info-circle-o' /> Info</NavLink>
+              </Menu.Item>
             </Menu>
           </Col>
           <Col span={3}>

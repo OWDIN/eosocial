@@ -12,9 +12,7 @@ class App extends React.Component {
       <Layout
         style={{ margin: '0 auto' }}
       >
-        <Header>
-          a
-        </Header>
+        <Header />
         <Content />
         <Footer />
       </Layout>
