@@ -2,6 +2,7 @@ import React from 'react'
 import {
   Button,
   Card,
+  Form,
   Icon,
   Input,
   message,
@@ -11,6 +12,8 @@ import {
   // Keystore,
   Keygen,
 } from 'eosjs-keygen'
+
+const FormItem = Form.Item
 
 export default class KeyGenerator extends React.Component {
   state = {
@@ -35,6 +38,29 @@ export default class KeyGenerator extends React.Component {
   }
 
   render() {
+    const formItemLayout = {
+      labelCol: {
+        xs: { span: 8 },
+        sm: { span: 4 },
+      },
+      wrapperCol: {
+        xs: { span: 24 },
+        sm: { span: 16 },
+      },
+    }
+    const tailFormItemLayout = {
+      wrapperCol: {
+        xs: {
+          span: 24,
+          offset: 0,
+        },
+        sm: {
+          span: 16,
+          offset: 4,
+        },
+      },
+    }
+
     return (
       <div>
         <Spin
@@ -44,10 +70,31 @@ export default class KeyGenerator extends React.Component {
           <Card
             title='Key Generator'
           >
-            <p>Master : <Input size='large' placeholder='Master Private Key' value={this.state.masterPrivateKey} /></p>
-            <p>Private: <Input size='large' placeholder='Private Key' value={this.state.privateKey} /></p>
-            <p>Public: <Input size='large' placeholder='Public Key' value={this.state.publicKey} /></p>
-            <Button onClick={this.handleClick} style={{ marginTop: 16 }}>Generate</Button>
+            <Form onSubmit={() => console.log('[submit]')}>
+              <FormItem
+                {...formItemLayout}
+                label='Master Key'
+              >
+                <Input size='large' placeholder='Master Key' value={this.state.masterPrivateKey} />
+              </FormItem>
+              <FormItem
+                {...formItemLayout}
+                label='Private Key'
+              >
+                <Input size='large' placeholder='Private Key' value={this.state.privateKey} />
+              </FormItem>
+              <FormItem
+                {...formItemLayout}
+                label='Public Key'
+              >
+                <Input size='large' placeholder='Public Key' value={this.state.publicKey} />
+              </FormItem>
+              <FormItem
+                {...tailFormItemLayout}
+              >
+                <Button onClick={this.handleClick} style={{ marginTop: 16 }}>Generate</Button>
+              </FormItem>
+            </Form>
           </Card>
         </Spin>
       </div>
