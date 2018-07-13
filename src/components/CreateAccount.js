@@ -8,6 +8,9 @@ import {
   Spin,
   message,
 } from 'antd'
+import {
+  createAccount,
+} from '../libs/EosJsApi'
 
 const FormItem = Form.Item
 
@@ -19,6 +22,7 @@ export default class CreateAccount extends React.Component {
   handleClick = () => {
     this.setState({ loading: true })
     message.success('Account Created', 5)
+    createAccount(this.state.username, this.state.ownerKey)
     this.setState({ loading: false })
   }
 
