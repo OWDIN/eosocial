@@ -33,7 +33,6 @@ const HeaderWrapper = () => {
               className='gnb'
               theme='light'
               mode='horizontal'
-              defaultSelectedKeys={['1']}
             >
               <Menu.Item key='1'>
                 <NavLink to='/'><Icon type='home' /> Feed</NavLink>

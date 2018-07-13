@@ -41,7 +41,7 @@ export default class KeyGenerator extends React.Component {
     const formItemLayout = {
       labelCol: {
         xs: { span: 8 },
-        sm: { span: 4 },
+        sm: { span: 5 },
       },
       wrapperCol: {
         xs: { span: 24 },
