@@ -17,20 +17,20 @@ export function createAccount(account, publicKey) {
 
   EOS.transaction((transaction) => {
     transaction.newaccount({
-      creator: 'eosio',
+      creator: 'socialeosapp',
       name: account,
       owner: publicKey,
       active: publicKey,
     })
 
     transaction.buyrambytes({
-      payer: 'eosio',
+      payer: 'socialeosapp',
       receiver: account,
       bytes: 8192,
     })
 
     transaction.delegatebw({
-      from: 'eosio',
+      from: 'socialeosapp',
       receiver: account,
       stake_net_quantity: '10.0000 SYS',
       stake_cpu_quantity: '10.0000 SYS',
