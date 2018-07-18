@@ -4,7 +4,8 @@ export function createAccount(account, publicKey) {
   const config = {
     chainId: process.env.REACT_APP_EOSIO_CHAIN_ID,
     keyProvider: [
-      process.env.REACT_APP_EOSIO_PRIVATE_KEY,
+      // process.env.REACT_APP_EOSIO_PRIVATE_KEY,
+      process.env.REACT_APP_EOSIO_EOSOCIAL_PRIVATE_KEY,
     ],
     httpEndpoint: 'http://localhost:8888',
     expireInSeconds: 60,
@@ -15,22 +16,22 @@ export function createAccount(account, publicKey) {
 
   const EOS = eosjs(config)
 
-  EOS.transaction((transaction) => {
+  return EOS.transaction((transaction) => {
     transaction.newaccount({
-      creator: 'socialeosapp',
+      creator: 'eossocialapp',
       name: account,
       owner: publicKey,
       active: publicKey,
     })
 
     transaction.buyrambytes({
-      payer: 'socialeosapp',
+      payer: 'eossocialapp',
       receiver: account,
       bytes: 8192,
     })
 
     transaction.delegatebw({
-      from: 'socialeosapp',
+      from: 'eossocialapp',
       receiver: account,
       stake_net_quantity: '10.0000 SYS',
       stake_cpu_quantity: '10.0000 SYS',
