@@ -101,30 +101,44 @@ $ cleos_docker get currency stats eosio.token SYS
   }
 }
 ```
+
 Check eosocial dApp account:
+
 ```bash
 $ cleos_docker get account eossocialapp
 permissions:
      owner     1:    1 <DAPP_PUBLIC_KEY>
         active     1:    1 <DAPP_PUBLIC_KEY>
 memory:
-     quota:     63.36 GiB    used:     3.475 KiB
+     quota:     63.36 GiB    used:     3.912 KiB
 
 net bandwidth:
      staked:    1000000.0000 SYS           (total stake delegated from account to self)
      delegated:       0.0000 SYS           (total staked delegated to account from others)
-     used:                 0 bytes
-     available:           16 TiB
-     limit:               16 TiB
+     used:               672 bytes
+     available:        164.8 TiB
+     limit:            164.8 TiB
 
 cpu bandwidth:
      staked:    1000000.0000 SYS           (total stake delegated from account to self)
      delegated:       0.0000 SYS           (total staked delegated to account from others)
-     used:                 0 us
-     available:        930.4 hr
-     limit:            930.4 hr
+     used:             71.44 ms
+     available:         9600 hr
+     limit:             9600 hr
+
+SYS balances:
+     liquid:       999957.5920 SYS
+     staked:      2000000.0000 SYS
+     unstaking:         0.0000 SYS
+     total:       2999957.5920 SYS
 
 producers:     <not voted>
+```
+
+Deploy smart contract:
+
+```bash
+# WIP
 ```
 
 Start React Project like below:

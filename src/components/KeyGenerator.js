@@ -56,7 +56,7 @@ export default class KeyGenerator extends React.Component {
         },
         sm: {
           span: 16,
-          offset: 4,
+          offset: 5,
         },
       },
     }

@@ -121,7 +121,7 @@ export default class CreateAccount extends React.Component {
         },
         sm: {
           span: 16,
-          offset: 4,
+          offset: 5,
         },
       },
     }
