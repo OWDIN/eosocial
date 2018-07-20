@@ -138,7 +138,15 @@ producers:     <not voted>
 Deploy smart contract:
 
 ```bash
-# WIP
+# send eosocial smart contract
+$ docker cp contracts/eosocial nodeos:/opt/eosio/bin/data-dir/contracts/
+
+# deploy eosocial smart contract
+$ cleos_docker set contract eossocialapp /opt/eosio/bin/data-dir/contracts/eosocial
+
+# test smart contract
+## write
+$ cleos_docker push action eossocialapp write '{"author": "test1111test", "content": "first post"}'
 ```
 
 Start React Project like below:
