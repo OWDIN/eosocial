@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# unlock wallet
+docker exec nodeos /opt/eosio/bin/cleos --wallet-url http://localhost:8888 wallet unlock --password PW5JxTyzLMHDWnsuUW6mwDbmcnNLmZKs5BnYppNAsy9vDXPzpR4mF
+
+# regenerate abi
+rm contracts/eosocial/eosocial.abi
+eosiocpp -g contracts/eosocial/eosocial.abi contracts/eosocial/eosocial.cpp
+
+# build and delivery
+eosiocpp -o contracts/eosocial/eosocial.wast contracts/eosocial/eosocial.cpp
+docker cp contracts/eosocial nodeos:/opt/eosio/bin/data-dir/contracts/
+
+# deploy contract
+docker exec nodeos /opt/eosio/bin/cleos --wallet-url http://localhost:8888 set contract eossocialapp /opt/eosio/bin/data-dir/contracts/eosocial
+
+# testcases
+## write
+#docker exec nodeos /opt/eosio/bin/cleos --wallet-url http://localhost:8888 --print-request --print-response push action eossocialapp write '{"author": "test1114test", "content": "test post"}' -p test1114test@active
+
+## update
+#docker exec nodeos /opt/eosio/bin/cleos --wallet-url http://localhost:8888 --print-request --print-response push action eossocialapp update '{"post_id":"36", "author": "test1114test", "content": "test post"}' -p test1114test@active
+
+## delete
+#docker exec nodeos /opt/eosio/bin/cleos --wallet-url http://localhost:8888 --print-request --print-response push action eossocialapp update '{"post_id":"36"}' -p test1114test@active
