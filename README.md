@@ -1,3 +1,5 @@
+![readme-banner](https://user-images.githubusercontent.com/1831308/43113852-1bcf3c50-8f37-11e8-8e8d-d38d064ddbe9.png)
+
 # EOSocial
 > Work in Progress...
 
