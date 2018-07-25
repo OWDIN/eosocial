@@ -9,6 +9,7 @@ import {
   Row,
   Col,
 } from 'antd'
+import Logo from '../assets/img/gnb-logo.png'
 import ProfileMenu from '../components/ProfileMenu'
 
 const Header = Layout.Header
@@ -23,8 +24,8 @@ const HeaderWrapper = () => {
           <Col span={4}>
             <div className='logo'>
               <NavLink to='/'>
-                <Icon type='link' style={{ marginRight: '6px' }} />
-                EOSocial <sub>beta</sub>
+                <img src={Logo} alt='Logo' className='gnb-logo' style={{ height: '34px', marginRight: '4px' }} />
+                <sub>beta</sub>
               </NavLink>
             </div>
           </Col>

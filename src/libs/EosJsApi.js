@@ -1,21 +1,20 @@
 import eosjs from 'eosjs'
 
+const config = {
+  chainId: process.env.REACT_APP_EOSIO_CHAIN_ID,
+  keyProvider: [
+    process.env.REACT_APP_EOSIO_EOSOCIAL_PRIVATE_KEY,
+  ],
+  httpEndpoint: 'http://localhost:8888',
+  expireInSeconds: 60,
+  broadcast: true,
+  // verbose: true, // in dev
+  sign: true,
+}
+
+const EOS = eosjs(config)
+
 export function createAccount(account, publicKey) {
-  const config = {
-    chainId: process.env.REACT_APP_EOSIO_CHAIN_ID,
-    keyProvider: [
-      // process.env.REACT_APP_EOSIO_PRIVATE_KEY,
-      process.env.REACT_APP_EOSIO_EOSOCIAL_PRIVATE_KEY,
-    ],
-    httpEndpoint: 'http://localhost:8888',
-    expireInSeconds: 60,
-    broadcast: true,
-    verbose: true, // in dev
-    sign: true,
-  }
-
-  const EOS = eosjs(config)
-
   return EOS.transaction((transaction) => {
     transaction.newaccount({
       creator: 'eossocialapp',
@@ -38,6 +37,18 @@ export function createAccount(account, publicKey) {
       transfer: 0,
     })
   })
+}
+
+export async function getGlobalFeed(limit=5) {
+  const data = await EOS.getTableRows({
+    code: 'eossocialapp',
+    scope: 'eossocialapp',
+    table: 'posts',
+    limit,
+    json: true,
+  })
+
+  return data
 }
 
 export default createAccount

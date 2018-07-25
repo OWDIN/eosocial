@@ -20,6 +20,7 @@ module.exports = {
     'no-unused-vars': ['error', { 'argsIgnorePattern': '[rR]eplace' }],
     'prefer-destructuring': [0],
     'prefer-template': [0],
+    'space-infix-ops': [0],
     'quotes': ['error', 'single', { 'avoidEscape': true }],
     'react/destructuring-assignment': [0],
     'react/jsx-filename-extension': [1, { 'extensions': ['.js', '.jsx'] }],

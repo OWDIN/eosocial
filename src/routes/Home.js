@@ -2,7 +2,11 @@ import React from 'react'
 import {
   Layout,
 } from 'antd'
-import { H1 } from 'glamorous';
+import {
+  Div,
+  H1,
+} from 'glamorous'
+import Feed from '../components/Feed'
 
 const AntContent = Layout.Content
 
@@ -13,13 +17,24 @@ export default class Home extends React.Component {
         style={{
           marginTop: '2rem',
           padding: '2rem 1rem',
-          background: 'white',
-          borderRadius: '4px',
-          border: '1px solid #e8e8e8',
-          // boxShadow: '0px 0px 2px 0px rgba(0, 0, 0, 0.2)',
         }}
       >
-        <H1>Home</H1>
+        <H1 fontWeight='bold'>Feed</H1>
+        <Div
+          display='flex'
+        >
+          <Div
+            width='273px'
+            height='400px'
+            backgroundColor='#e0e0e0'
+          />
+          <Feed />
+          <Div
+            width='273px'
+            height='400px'
+            backgroundColor='#e0e0e0'
+          />
+        </Div>
       </AntContent>
     )
   }
