@@ -20,7 +20,6 @@ export default class Feed extends React.Component {
         loading: false,
         feedItems: response,
       })
-
     })
   }
 
@@ -32,7 +31,13 @@ export default class Feed extends React.Component {
     console.log('[ render() ]: ', items)
     const feed = items.map((item) => {
       return (
-        <FeedItem author={item.author} content={item.content} createdAt={item.created_at} updatedAt={item.updated_at} loading={this.state.loading} />
+        <FeedItem
+          author={item.author}
+          content={item.content}
+          createdAt={item.created_at}
+          updatedAt={item.updated_at}
+          loading={this.state.loading}
+        />
       )
     })
 

@@ -3,7 +3,7 @@
 # EOSocial
 > Work in Progress...
 
-EOSocial is clone of Reddit-like sample dApp run by EOS Testnet. You can see how dApp works.
+EOSocial is votable social sample dApp run by EOS Testnet. You can see how dApp works.
 
 ## Getting Started
 These instructions will get you project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live machine.
@@ -47,7 +47,7 @@ $ cleos_docker wallet create
 $ cleos_docker wallet unlock --password <WALLET_PASSWORD>
 $ cleos_docker wallet import 5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3
 
-# create important system accounts
+# create system accounts
 $ cleos_docker create account eosio eosio.bios EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV
 $ cleos_docker create account eosio eosio.bpay EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV
 $ cleos_docker create account eosio eosio.msig EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV

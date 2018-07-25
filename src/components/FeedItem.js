@@ -3,6 +3,7 @@ import {
   Avatar,
   Card,
 } from 'antd'
+import moment from 'moment'
 
 export default class FeedItem extends React.Component {
   render() {
@@ -15,6 +16,7 @@ export default class FeedItem extends React.Component {
           <span>
             <Avatar shape='square' size='large' style={{ marginRight: '12px' }} src={avatarURL} />
             <b>{this.props.author}</b>
+            <span> - {moment.unix(this.props.createdAt).fromNow()}</span>
           </span>
         )}
         // extra={<span>Detail</span>}
@@ -26,7 +28,7 @@ export default class FeedItem extends React.Component {
           boxShadow: '0px 0px 2px 0px rgba(0, 0, 0, 0.2)',
         }}
       >
-        <h2>{this.props.title}</h2>
+        {/* <h2>{this.props.title}</h2> */}
         <p>{this.props.content}</p>
       </Card>
     )
@@ -35,7 +37,9 @@ export default class FeedItem extends React.Component {
 
 FeedItem.defaultProps = {
   loading: false,
-  author: 'test1114test',
-  title: 'This is Test',
+  author: '',
+  title: '',
   content: '',
+  createdAt: 0,
+  updatedAt: 0,
 }

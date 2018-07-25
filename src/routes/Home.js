@@ -4,7 +4,6 @@ import {
 } from 'antd'
 import {
   Div,
-  H1,
 } from 'glamorous'
 import Feed from '../components/Feed'
 
@@ -16,23 +15,25 @@ export default class Home extends React.Component {
       <AntContent
         style={{
           marginTop: '2rem',
-          padding: '2rem 1rem',
         }}
       >
-        <H1 fontWeight='bold'>Feed</H1>
         <Div
           display='flex'
         >
           <Div
             width='273px'
             height='400px'
-            backgroundColor='#e0e0e0'
+            // backgroundColor='#e0e0e0'
+            // border='1px solid #ccc'
+            // borderRadius='4px'
           />
           <Feed />
           <Div
             width='273px'
             height='400px'
-            backgroundColor='#e0e0e0'
+            // backgroundColor='#e0e0e0'
+            // border='1px solid #ccc'
+            // borderRadius='4px'
           />
         </Div>
       </AntContent>
