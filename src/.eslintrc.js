@@ -17,6 +17,7 @@ module.exports = {
     'max-len': ['error', { 'code': 120 }],
     'no-alert': [0],
     'no-console': [0],
+    'no-param-reassign': [0],
     'no-unused-vars': ['error', { 'argsIgnorePattern': '[rR]eplace' }],
     'prefer-destructuring': [0],
     'prefer-template': [0],

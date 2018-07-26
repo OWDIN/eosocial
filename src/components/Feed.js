@@ -10,12 +10,17 @@ export default class Feed extends React.Component {
     super()
     this.state = {
       loading: true,
-      feedItems: [1, 2, 3],
+      feedItems: [],
     }
   }
 
   componentDidMount() {
     getGlobalFeed().then((response) => {
+      response.rows.map((data) => {
+        data.key = data.id
+        return data
+      })
+
       this.setState({
         loading: false,
         feedItems: response,
@@ -24,14 +29,12 @@ export default class Feed extends React.Component {
   }
 
   render() {
-    // const items = [1, 2, 3]
-    const items = this.state.feedItems.rows || []
-    // const items = Array.from(this.state.feedItems.rows)
-    // console.log('[ render() ]: ', typeof items, items)
+    const items = this.state.feedItems.rows || ['']
     console.log('[ render() ]: ', items)
     const feed = items.map((item) => {
       return (
         <FeedItem
+          key={item.id}
           author={item.author}
           content={item.content}
           createdAt={item.created_at}
@@ -48,7 +51,6 @@ export default class Feed extends React.Component {
         marginRight='20px'
       >
         {feed}
-        {/* <FeedItem content='test' loading={this.state.loading} /> */}
       </Div>
     )
   }

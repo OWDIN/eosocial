@@ -5,6 +5,7 @@ import {
 import {
   Avatar,
   Dropdown,
+  Icon,
   Menu,
 } from 'antd'
 import {
@@ -13,15 +14,15 @@ import {
 
 const ProfileDropdownMenu = (
   <Menu>
-    <Menu.Item key='0'>
-      Profile
+    <Menu.Item key='profile'>
+      <NavLink to='/profile'><Icon type='user' style={{ marginRight: '10px' }} />Profile</NavLink>
     </Menu.Item>
-    <Menu.Item key='1'>
-      Settings
+    <Menu.Item key='settings'>
+      <NavLink to='/settings'><Icon type='setting' style={{ marginRight: '10px' }} />Setting</NavLink>
     </Menu.Item>
     <Menu.Divider />
-    <Menu.Item key='3'>
-      Logout
+    <Menu.Item key='logout'>
+      <NavLink to='/logout'><Icon type='logout' style={{ marginRight: '10px' }} />Logout</NavLink>
     </Menu.Item>
   </Menu>
 )
@@ -48,19 +49,22 @@ const ProfileNotLoggedIn = (
 )
 
 export default class ProfileMenu extends React.Component {
-  constructor() {
-    super()
-    this.auth = false
+  constructor(props) {
+    super(props)
+
+    this.auth = this.props.auth
+    this.profile = this.props.profile
   }
 
   render() {
     let ProfileMenuContent
+    const avatarURL = `https://avatars.dicebear.com/v2/identicon/${this.props.profile.username}.svg`
 
     if (this.auth) {
       ProfileMenuContent = (
         <Dropdown overlay={ProfileDropdownMenu} placement='bottomRight' trigger={['click']}>
           <div>
-            <Avatar size='large' icon='user' />
+            <Avatar shape='square' size='large' icon='user' src={avatarURL} />
           </div>
         </Dropdown>
       )
@@ -78,4 +82,13 @@ export default class ProfileMenu extends React.Component {
       </div>
     )
   }
+}
+
+ProfileMenu.defaultProps = {
+  auth: true,
+  profile: {
+    username: '',
+    publicKey: '',
+    privateKey: '',
+  },
 }

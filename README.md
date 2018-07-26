@@ -5,6 +5,8 @@
 
 EOSocial is votable social sample dApp run by EOS Testnet. You can see how dApp works.
 
+**Disclaimer: This is sample dApp running on local Testnet. You have to use carefully if you're use it with your Mainnet keys.**
+
 ## Getting Started
 These instructions will get you project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live machine.
 
