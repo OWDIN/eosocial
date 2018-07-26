@@ -85,7 +85,7 @@ export default class ProfileMenu extends React.Component {
 }
 
 ProfileMenu.defaultProps = {
-  auth: true,
+  auth: false,
   profile: {
     username: '',
     publicKey: '',

@@ -14,7 +14,9 @@ import ProfileMenu from '../components/ProfileMenu'
 
 const Header = Layout.Header
 
-const HeaderWrapper = () => {
+const HeaderWrapper = (props) => {
+  const location = window.location.href.split('/')
+
   return (
     <Header
       className='gnb'
@@ -34,25 +36,37 @@ const HeaderWrapper = () => {
               className='gnb'
               theme='light'
               mode='horizontal'
+              defaultOpenKeys={[location[3]]}
+              defaultSelectedKeys={location[4] ? [location[3] + ':' + location[4]] : [location[3]]} // highlight primary menu or secondary menu
+              selectedKeys={location[4] ? [location[3] + ':' + location[4]] : [location[3]]}
             >
-              <Menu.Item key='1'>
-                <NavLink to='/'><Icon type='home' /> Feed</NavLink>
+              <Menu.Item key='feed'>
+                <NavLink to='/feed'><Icon type='home' /> Feed</NavLink>
               </Menu.Item>
-              <Menu.Item key='2' disabled>
+              <Menu.Item key='trending' disabled>
                 <NavLink to='/trending'><Icon type='line-chart' /> Trending</NavLink>
               </Menu.Item>
-              <Menu.Item key='3'>
+              <Menu.Item key='info'>
                 <NavLink to='/info'><Icon type='info-circle-o' /> Info</NavLink>
               </Menu.Item>
             </Menu>
           </Col>
           <Col span={3}>
-            <ProfileMenu />
+            <ProfileMenu auth={props.auth} profile={props.profile} />
           </Col>
         </Row>
       </div>
     </Header>
   )
+}
+
+HeaderWrapper.defaultProps = {
+  auth: false,
+  profile: {
+    username: '',
+    publicKey: '',
+    privateKey: '',
+  },
 }
 
 export default HeaderWrapper

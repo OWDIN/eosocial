@@ -6,13 +6,20 @@ import Header from './layouts/Header'
 import Content from './layouts/Content'
 import Footer from './layouts/Footer'
 
-class App extends React.Component {
+export default class App extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.auth = this.props.auth
+    this.profile = this.props.profile
+  }
+
   render() {
     return (
       <Layout
         style={{ margin: '0 auto' }}
       >
-        <Header />
+        <Header auth={this.props.auth} profile={this.props.profile} />
         <Content />
         <Footer />
       </Layout>
@@ -20,4 +27,11 @@ class App extends React.Component {
   }
 }
 
-export default App
+App.defaultProps = {
+  auth: true,
+  profile: {
+    username: '',
+    publicKey: '',
+    privateKey: '',
+  },
+}

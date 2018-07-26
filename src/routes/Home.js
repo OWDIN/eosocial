@@ -10,6 +10,13 @@ import Feed from '../components/Feed'
 const AntContent = Layout.Content
 
 export default class Home extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.auth = this.props.auth
+    this.profile = this.props.profile
+  }
+
   render() {
     return (
       <AntContent
@@ -39,4 +46,13 @@ export default class Home extends React.Component {
       </AntContent>
     )
   }
+}
+
+Home.defaultProps = {
+  auth: false,
+  profile: {
+    username: '',
+    publicKey: '',
+    privateKey: '',
+  },
 }
