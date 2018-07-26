@@ -20,7 +20,7 @@ export default class App extends React.Component {
         style={{ margin: '0 auto' }}
       >
         <Header auth={this.props.auth} profile={this.props.profile} />
-        <Content />
+        <Content auth={this.props.auth} profile={this.props.profile} />
         <Footer />
       </Layout>
     )
@@ -28,9 +28,10 @@ export default class App extends React.Component {
 }
 
 App.defaultProps = {
+  // auth: false,
   auth: true,
   profile: {
-    username: '',
+    username: 'channprj',
     publicKey: '',
     privateKey: '',
   },

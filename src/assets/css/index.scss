@@ -40,3 +40,10 @@ body {
   height: 56px;
   line-height: 56px;
 }
+
+// QuickSubmit
+.ant-input:focus {
+  appearance: none !important;
+  outline: none !important;
+  box-shadow: 0 0!important;
+}

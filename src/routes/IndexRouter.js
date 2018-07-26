@@ -4,16 +4,21 @@ import {
   Route,
   Redirect,
 } from 'react-router-dom'
-// import EOS from '../libs/api'
 import Home from './Home'
 import Signup from './Signup'
 
 export default class IndexRouter extends React.Component {
-  // console.log(EOS)
+  constructor(props) {
+    super(props)
+
+    this.auth = this.props.auth
+    this.profile = this.props.profile
+  }
+
   render() {
     return (
       <Switch>
-        <Route exact path='/feed' component={Home} />
+        <Route exact path='/feed' render={() => <Home {...this.props} />} />
         <Route path='/signup' component={Signup} />
 
         {/* redirection */}
@@ -33,6 +38,12 @@ export default class IndexRouter extends React.Component {
     )
   }
 }
+
 IndexRouter.defaultProps = {
   auth: false,
+  profile: {
+    username: '',
+    publicKey: '',
+    privateKey: '',
+  },
 }

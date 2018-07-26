@@ -9,7 +9,7 @@ class FooterWrapper extends React.Component {
   render() {
     return (
       <Footer style={{ textAlign: 'center' }}>
-        &copy; EOSOCIAL
+        &copy; EOSocial
       </Footer>
     );
   }

@@ -1,13 +1,18 @@
 import React from 'react'
 import { Div } from 'glamorous'
+import QuickSubmit from './QuickSubmit'
 import FeedItem from './FeedItem'
 import {
   getGlobalFeed,
 } from '../libs/EosJsApi'
 
 export default class Feed extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
+
+    this.auth = this.props.auth
+    this.profile = this.props.profile
+
     this.state = {
       loading: true,
       feedItems: [],
@@ -50,8 +55,18 @@ export default class Feed extends React.Component {
         marginLeft='20px'
         marginRight='20px'
       >
-        {feed}
+        <QuickSubmit auth={this.props.auth} profile={this.props.profile} />
+        { feed }
       </Div>
     )
   }
+}
+
+Feed.defaultProps = {
+  auth: false,
+  profile: {
+    username: '',
+    publicKey: '',
+    privateKey: '',
+  },
 }

@@ -34,7 +34,7 @@ export default class Home extends React.Component {
             // border='1px solid #ccc'
             // borderRadius='4px'
           />
-          <Feed />
+          <Feed auth={this.props.auth} profile={this.props.profile} />
           <Div
             width='273px'
             height='400px'
