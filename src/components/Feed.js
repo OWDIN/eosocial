@@ -31,7 +31,7 @@ export default class Feed extends React.Component {
   render() {
     const items = this.state.feedItems.rows || ['']
     console.log('[ render() ]: ', items)
-    const feed = items.map((item) => {
+    const feed = items.reverse().map((item) => {
       return (
         <FeedItem
           key={item.id}
