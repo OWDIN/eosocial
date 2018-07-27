@@ -34,20 +34,24 @@ export default class Feed extends React.Component {
   }
 
   render() {
-    const items = this.state.feedItems.rows || ['']
-    console.log('[ render() ]: ', items)
-    const feed = items.reverse().map((item) => {
-      return (
-        <FeedItem
-          key={item.id}
-          author={item.author}
-          content={item.content}
-          createdAt={item.created_at}
-          updatedAt={item.updated_at}
-          loading={this.state.loading}
-        />
-      )
-    })
+    const items = this.state.feedItems.rows || ''
+    let feed = null
+
+    if (items !== '') {
+      feed = items.reverse().map((item) => {
+        return (
+          <FeedItem
+            // key={Date.now()}
+            key={item.key}
+            author={item.author}
+            content={item.content}
+            createdAt={item.created_at}
+            updatedAt={item.updated_at}
+            loading={this.state.loading}
+          />
+        )
+      })
+    }
 
     return (
       <Div
@@ -56,7 +60,9 @@ export default class Feed extends React.Component {
         marginRight='20px'
       >
         <QuickSubmit auth={this.props.auth} profile={this.props.profile} />
-        { feed }
+        <Div>
+          { feed }
+        </Div>
       </Div>
     )
   }

@@ -10,7 +10,7 @@ class eosocial : public contract {
 public:
     eosocial(account_name self) : contract(self) {}
 
-    void notice();
+    void debug();
     void write(const account_name author, const string content);
     void update(const uint64_t post_id, const account_name author, const string content);
     void remove(const uint64_t post_id);
@@ -90,9 +90,7 @@ private:
     };
     // typedef multi_index<N(posts), post> post_table;
     typedef multi_index<N(posts), post,
-        indexed_by<N(author),
-            const_mem_fun<post, account_name, &post::get_account>
-        >
+        indexed_by< N(author), const_mem_fun<post, account_name, &post::get_account> >
     > post_table;
 
     // @abi table polls i64
@@ -103,10 +101,14 @@ private:
         time voted_at;
 
         uint64_t primary_key() const { return id; }
+        uint64_t get_post_id() const { return post_id; }
 
         EOSLIB_SERIALIZE(poll, (id)(post_id)(voter)(voted_at))
     };
-    typedef multi_index<N(polls), poll> poll_table;
+    // typedef multi_index<N(polls), poll> poll_table;
+    typedef multi_index<N(polls), poll,
+        indexed_by< N(author), const_mem_fun<poll, account_name, &poll::get_post_id> >
+    > poll_table;
 };
 
-EOSIO_ABI(eosocial, (notice)(write)(update)(remove)(vote))
+EOSIO_ABI(eosocial, (debug)(write)(update)(remove)(vote))

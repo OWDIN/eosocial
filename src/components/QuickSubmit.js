@@ -2,8 +2,8 @@ import React from 'react'
 import {
   Alert,
   Avatar,
+  Button,
   Card,
-  Icon,
   Input,
 } from 'antd'
 
@@ -37,22 +37,27 @@ export default class QuickSubmit extends React.Component {
             border: '1px solid #e8e8e8',
             boxShadow: '0px 0px 2px 0px rgba(0, 0, 0, 0.2)',
           }}
-          actions={[
-            (<span><Icon type='like-o' /> 0</span>),
-            (<span><Icon type='dislike-o' /> 0</span>),
-          ]}
         >
           <TextArea
             rows={4}
             style={{
               border: 'none',
               resize: 'none',
-              appearance: 'none',
-              outline: 'none',
-              boxShadow: '0 0 !important',
+              // appearance: 'none',
+              // outline: 'none',
+              // boxShadow: '0 0 !important',
             }}
             autosize='true'
           />
+          <Button
+            type='primary'
+            style={{
+              float: 'right',
+              marginTop: '20px',
+            }}
+          >
+            Submit
+          </Button>
         </Card>
       )
     } else {

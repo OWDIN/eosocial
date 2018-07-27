@@ -90,7 +90,7 @@ Public key: <DAPP_PUBLIC_KEY>
 $ cleos_docker system newaccount eosio --transfer eossocialapp <DAPP_PUBLIC_KEY> --stake-net "1000000 SYS" --stake-cpu "1000000 SYS" --buy-ram "100000 SYS"
 
 # transfer initial deposit
-$ cleos_docker --print-request --print-response transfer eosio eossocialapp "1000000 SYS" "initial deposit"
+$ cleos_docker transfer eosio eossocialapp "1000000 SYS" "initial deposit"
 ```
 
 Check generated token:
@@ -142,6 +142,9 @@ producers:     <not voted>
 Deploy smart contract:
 
 ```bash
+# import eossocialapp private key
+$ cleos_docker wallet import <DAPP_PRIVATE_KEY>
+
 # send eosocial smart contract
 $ docker cp contracts/eosocial nodeos:/opt/eosio/bin/data-dir/contracts/
 
@@ -150,7 +153,7 @@ $ cleos_docker set contract eossocialapp /opt/eosio/bin/data-dir/contracts/eosoc
 
 # test smart contract
 ## write
-$ cleos_docker push action eossocialapp write '{"author": "test1111test", "content": "first post"}'
+$ cleos_docker push action eossocialapp write '{"author": "{ACCOUNT_NAME}", "content": "first post"}' -p {ACCOUNT_NAME}
 ```
 
 Start React Project like below:

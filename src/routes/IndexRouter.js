@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom'
 import Home from './Home'
 import Signup from './Signup'
+import Login from './Login'
 
 export default class IndexRouter extends React.Component {
   constructor(props) {
@@ -19,6 +20,7 @@ export default class IndexRouter extends React.Component {
     return (
       <Switch>
         <Route exact path='/feed' render={() => <Home {...this.props} />} />
+        <Route exact path='/login' render={() => <Login {...this.props} />} />
         <Route path='/signup' component={Signup} />
 
         {/* redirection */}

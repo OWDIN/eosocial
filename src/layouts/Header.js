@@ -37,7 +37,7 @@ const HeaderWrapper = (props) => {
               theme='light'
               mode='horizontal'
               defaultOpenKeys={[location[3]]}
-              defaultSelectedKeys={location[4] ? [location[3] + ':' + location[4]] : [location[3]]} // highlight primary menu or secondary menu
+              defaultSelectedKeys={location[4] ? [location[3] + ':' + location[4]] : [location[3]]}
               selectedKeys={location[4] ? [location[3] + ':' + location[4]] : [location[3]]}
             >
               <Menu.Item key='feed'>

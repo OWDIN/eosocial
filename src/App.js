@@ -28,10 +28,9 @@ export default class App extends React.Component {
 }
 
 App.defaultProps = {
-  // auth: false,
-  auth: true,
+  auth: false,
   profile: {
-    username: 'channprj',
+    username: '',
     publicKey: '',
     privateKey: '',
   },

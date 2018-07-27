@@ -1,7 +1,7 @@
 #include "eosocial.hpp"
 
 // @abi action debug
-void eosocial::notice() {
+void eosocial::debug() {
     print("1807241738 - This contract is under the development.");
 }
 
@@ -9,7 +9,7 @@ void eosocial::notice() {
 void eosocial::write(const account_name author, const string content) {
     print("[ write::start ]");
 
-    post_table post(_self, _self);
+    post_table post(_self, _self); // code, scope
     require_auth(author);
 
     post_id post_index;
@@ -68,7 +68,7 @@ void eosocial::vote(const uint64_t post_id, const account_name voter) {
 
     vote_id vote_index;
     get_vote_id(vote_index);
-    uint64_t vote_id = vote_index.id;
+    uint64_t vote_id = vote_index.id++;
 
     poll.emplace(voter, [&](auto& data) {
         data.id = vote_id;
@@ -79,4 +79,6 @@ void eosocial::vote(const uint64_t post_id, const account_name voter) {
 
     print("upvote post: ", post_id);
     // print("downvote post: ", post_id);
+
+    set_vote_id(vote_index);
 }
