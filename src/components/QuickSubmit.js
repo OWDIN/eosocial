@@ -1,11 +1,18 @@
 import React from 'react'
+// import { Helmet } from 'react-helmet'
+// import { Highlight } from 'react-highlight.js'
 import {
   Alert,
   Avatar,
   Button,
   Card,
   Input,
+  Modal,
+  notification,
 } from 'antd'
+import {
+  createPost,
+} from '../libs/EosJsApi'
 
 const { TextArea } = Input
 
@@ -15,6 +22,56 @@ export default class QuickSubmit extends React.Component {
 
     this.auth = this.props.auth
     this.profile = this.props.profile
+
+    this.state = {
+      content: new Date(),
+    }
+  }
+
+  handleNotification = (type='error', message='Notification', description='') => {
+    notification[type]({
+      message,
+      description,
+      duration: 10,
+    })
+  }
+
+  handleModal = (type, title, content) => {
+    Modal[type]({
+      title,
+      content,
+      // content: (
+      //   <Highlight language='json'>
+      //     {content}
+      //   </Highlight>
+      // ),
+    })
+  }
+
+  handleInputChange = (event) => {
+    const target = event.target
+    const name = target.name
+    const value = target.value
+
+    this.setState({
+      [name]: value,
+    })
+  }
+
+  handleSubmit = async () => {
+    const result = await createPost(this.props.profile.username, this.props.profile.privateKey, this.state.content)
+    console.log(result)
+
+    this.handleModal(
+      'success',
+      'Executed eossocialapp:action:write()',
+      JSON.stringify(result),
+    )
+
+    this.setState({
+      content: '',
+    })
+    this.props.fetch()
   }
 
   render() {
@@ -39,6 +96,7 @@ export default class QuickSubmit extends React.Component {
           }}
         >
           <TextArea
+            name='content'
             rows={4}
             style={{
               border: 'none',
@@ -47,6 +105,7 @@ export default class QuickSubmit extends React.Component {
               // outline: 'none',
               // boxShadow: '0 0 !important',
             }}
+            onChange={this.handleInputChange}
             autosize='true'
           />
           <Button
@@ -55,9 +114,15 @@ export default class QuickSubmit extends React.Component {
               float: 'right',
               marginTop: '20px',
             }}
+            onClick={() => this.handleSubmit()}
           >
             Submit
           </Button>
+          {/*
+          <Helmet>
+            <link rel='stylesheet' href='https://highlightjs.org/static/demo/styles/dracula.css' />
+          </Helmet>
+          */}
         </Card>
       )
     } else {

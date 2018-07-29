@@ -48,7 +48,7 @@ export function validPublic(key) {
   return ecc.isValidPublic(key)
 }
 
-export async function getGlobalFeed(limit=20) {
+export async function getGlobalFeed(limit=100) {
   const data = await EOS.getTableRows({
     code: 'eossocialapp',
     scope: 'eossocialapp',
@@ -89,4 +89,42 @@ export async function login(accountName, privateKey) {
   return false
 }
 
-export default createAccount
+export async function createPost(accountName, privateKey, content) {
+  // const result = await EOS.transaction('eossocialapp', (eossocialapp) => {
+  //   eossocialapp.write({
+  //     author: accountName,
+  //     content,
+  //   }, { authorization: `${accountName}` })
+  // })
+
+  const contractConfig = {
+    chainId: process.env.REACT_APP_EOSIO_CHAIN_ID,
+    keyProvider: [
+      privateKey,
+    ],
+    httpEndpoint: 'http://localhost:8888',
+    expireInSeconds: 60,
+    broadcast: true,
+    verbose: false, // true in dev
+    sign: true,
+  }
+
+  const contractEOS = eosjs(contractConfig)
+
+  const result = await contractEOS.transaction({
+    actions: [{
+      account: 'eossocialapp',
+      name: 'write',
+      data: {
+        author: accountName,
+        content,
+      },
+      authorization: [{
+        actor: accountName,
+        permission: 'active',
+      }],
+    }],
+  })
+
+  return result
+}

@@ -20,6 +20,10 @@ export default class Feed extends React.Component {
   }
 
   componentDidMount() {
+    this.fetch()
+  }
+
+  fetch = () => {
     getGlobalFeed().then((response) => {
       response.rows.map((data) => {
         data.key = data.id
@@ -59,7 +63,7 @@ export default class Feed extends React.Component {
         marginLeft='20px'
         marginRight='20px'
       >
-        <QuickSubmit auth={this.props.auth} profile={this.props.profile} />
+        <QuickSubmit auth={this.props.auth} profile={this.props.profile} fetch={this.fetch} />
         <Div>
           { feed }
         </Div>
