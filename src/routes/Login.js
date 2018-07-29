@@ -32,7 +32,7 @@ export default class Login extends React.Component {
         </H1>
         <Row gutter={40} type='flex' justify='center' align='center'>
           <Col span={12}>
-            <LoginForm />
+            <LoginForm handleLogin={this.props.handleLogin} />
           </Col>
         </Row>
       </AntContent>

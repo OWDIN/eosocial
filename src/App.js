@@ -9,7 +9,6 @@ import Footer from './layouts/Footer'
 export default class App extends React.Component {
   constructor() {
     super()
-
     const storedAccountName = sessionStorage.getItem('account_name')
     const storedPublicKey = sessionStorage.getItem('public_key')
     const storedPrivateKey = sessionStorage.getItem('private_key')
@@ -35,13 +34,40 @@ export default class App extends React.Component {
     }
   }
 
+  handleLogin = () => {
+    const storedAccountName = sessionStorage.getItem('account_name')
+    const storedPublicKey = sessionStorage.getItem('public_key')
+    const storedPrivateKey = sessionStorage.getItem('private_key')
+
+    if (storedAccountName && storedPrivateKey) {
+      this.setState(() => ({
+        auth: true,
+        profile: {
+          username: storedAccountName,
+          publicKey: storedPublicKey,
+          privateKey: storedPrivateKey,
+        },
+      }))
+    } else {
+      this.setState(() => ({
+        auth: false,
+        profile: {
+          username: null,
+          publicKey: null,
+          privateKey: null,
+        },
+      }))
+    }
+  }
+
   render() {
+    console.log('App:render()')
     return (
       <Layout
         style={{ margin: '0 auto' }}
       >
         <Header auth={this.state.auth} profile={this.state.profile} />
-        <Content auth={this.state.auth} profile={this.state.profile} />
+        <Content auth={this.state.auth} profile={this.state.profile} handleLogin={this.handleLogin} />
         <Footer />
       </Layout>
     )

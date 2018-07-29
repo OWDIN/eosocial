@@ -45,7 +45,6 @@ export function validPrivate(key) {
 }
 
 export function validPublic(key) {
-  console.log('validPublic: ', ecc.isValidPublic(key))
   return ecc.isValidPublic(key)
 }
 
@@ -87,7 +86,6 @@ export async function login(accountName, privateKey) {
     }
   }
 
-  // console.log('[ isValid ]: ', isValid)
   return false
 }
 

@@ -17,7 +17,7 @@ export default class Content extends React.Component {
       <Div
         className='container'
       >
-        <IndexRouter auth={this.props.auth} profile={this.props.profile} />
+        <IndexRouter auth={this.props.auth} profile={this.props.profile} handleLogin={this.props.handleLogin} />
       </Div>
     )
   }

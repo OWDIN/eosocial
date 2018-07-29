@@ -19,10 +19,14 @@ import {
 const FormItem = Form.Item
 
 export default class LoginForm extends React.Component {
-  state = {
-    loading: false,
-    username: null,
-    privateKey: null,
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      loading: false,
+      username: null,
+      privateKey: null,
+    }
   }
 
   handleClick = async () => {

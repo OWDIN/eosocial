@@ -49,18 +49,11 @@ const ProfileNotLoggedIn = (
 )
 
 export default class ProfileMenu extends React.Component {
-  constructor(props) {
-    super(props)
-
-    this.auth = this.props.auth
-    this.profile = this.props.profile
-  }
-
   render() {
-    let ProfileMenuContent
+    let ProfileMenuContent = ''
     const avatarURL = `https://avatars.dicebear.com/v2/identicon/${this.props.profile.username}.svg`
 
-    if (this.auth) {
+    if (this.props.auth) {
       ProfileMenuContent = (
         <Dropdown overlay={ProfileDropdownMenu} placement='bottomRight' trigger={['click']}>
           <div>

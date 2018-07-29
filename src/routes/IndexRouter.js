@@ -24,13 +24,23 @@ export default class IndexRouter extends React.Component {
         <Route path='/signup' component={Signup} />
 
         {/* redirection */}
-        <Route exact path='/' render={() => <Redirect to='/feed' />} />
+        <Route
+          exact
+          path='/'
+          render={
+            () => {
+              this.props.handleLogin()
+              return <Redirect to='/feed' />
+            }
+          }
+        />
         <Route
           auth={this.props.auth}
           path='/logout'
           render={
             () => {
-              // this.props.auth.logout()
+              sessionStorage.clear()
+              this.props.handleLogin()
               return <Redirect to='/' />
             }
           }
