@@ -9,7 +9,7 @@ const config = {
   httpEndpoint: 'http://localhost:8888',
   expireInSeconds: 60,
   broadcast: true,
-  // verbose: true, // in dev
+  verbose: false, // true in dev
   sign: true,
 }
 
@@ -63,14 +63,31 @@ export async function getGlobalFeed(limit=20) {
 
 export async function login(accountName, privateKey) {
   const accountInfo = await EOS.getAccount(accountName)
-  const publicKey = ecc.privateToPublic(privateKey) // ERR: need try catch
+  const accountActiveKeys = accountInfo.permissions[0].required_auth.keys
+  const accountOwnerKeys = accountInfo.permissions[1].required_auth.keys
 
-  console.log(accountInfo)
+  let publicKey = null
 
-  if (accountInfo.permissions[0].required_auth.keys[0].key === publicKey) { // ERR: need multiple keys
-    return true
+  try {
+    publicKey = ecc.privateToPublic(privateKey)
+  } catch (error) {
+    console.log(error)
+    return false
   }
 
+  for (let index = 0; index < accountActiveKeys.length; index++) {
+    if (accountActiveKeys[index].key === publicKey) {
+      return true
+    }
+  }
+
+  for (let index = 0; index < accountOwnerKeys.length; index++) {
+    if (accountOwnerKeys[index].key === publicKey) {
+      return true
+    }
+  }
+
+  // console.log('[ isValid ]: ', isValid)
   return false
 }
 

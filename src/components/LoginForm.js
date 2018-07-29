@@ -1,5 +1,8 @@
 import React from 'react'
 import {
+  Redirect,
+} from 'react-router-dom'
+import {
   Button,
   Card,
   Form,
@@ -22,11 +25,18 @@ export default class LoginForm extends React.Component {
     privateKey: null,
   }
 
-  handleClick = () => {
+  handleClick = async () => {
     this.setState({ loading: true })
-    if (login(this.state.username, this.state.privateKey)) {
+
+    if (await login(this.state.username, this.state.privateKey) === true) {
+      // IMPORTANT: THIS LOGIC IS NOT SAFE! USE SCATTER OR ELSE.
+      // change this logic when you're going to deploy.
+      sessionStorage.setItem('account_name', this.state.username)
+      sessionStorage.setItem('public_key', this.state.publicKey)
+      sessionStorage.setItem('private_key', this.state.privateKey)
+
       message.success('Successfully logged in.', 5)
-      this.setState({ loading: true })
+      this.setState({ loading: false })
     } else {
       message.error('Failed to logged in.', 5)
       this.setState({ loading: false })
@@ -41,8 +51,6 @@ export default class LoginForm extends React.Component {
     this.setState({
       [name]: value,
     }, () => this.validateForm(name))
-
-    console.table(this.state)
   }
 
   validateForm = (name) => {
@@ -95,6 +103,10 @@ export default class LoginForm extends React.Component {
   }
 
   render() {
+    if (sessionStorage.getItem('private_key') && sessionStorage.getItem('account_name')) {
+      return <Redirect to='/' />
+    }
+
     const formItemLayout = {
       labelCol: {
         xs: { span: 8 },
