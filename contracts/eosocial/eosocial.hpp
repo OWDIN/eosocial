@@ -14,7 +14,7 @@ public:
     void write(const account_name author, const string content);
     void update(const uint64_t post_id, const account_name author, const string content);
     void remove(const uint64_t post_id);
-    void vote(const uint64_t post_id, const account_name voter);
+    void vote(const uint64_t post_id, const account_name voter, const string type);
 
 private:
     static uint64_t id;
@@ -84,13 +84,14 @@ private:
         time updated_at;
 
         uint64_t primary_key() const { return id; }
-        account_name get_account() const { return author; }
+        account_name by_account() const { return author; }
 
         EOSLIB_SERIALIZE(post, (id)(content)(author)(created_at)(updated_at))
     };
-    // typedef multi_index<N(posts), post> post_table;
     typedef multi_index<N(posts), post,
-        indexed_by< N(author), const_mem_fun<post, account_name, &post::get_account> >
+        indexed_by< N(author),
+            const_mem_fun<post, account_name, &post::by_account>
+        >
     > post_table;
 
     // @abi table polls i64
@@ -98,16 +99,18 @@ private:
         uint64_t id;
         uint64_t post_id;
         account_name voter;
+        string type;
         time voted_at;
 
         uint64_t primary_key() const { return id; }
-        uint64_t get_post_id() const { return post_id; }
+        uint64_t by_post_id() const { return post_id; }
 
         EOSLIB_SERIALIZE(poll, (id)(post_id)(voter)(voted_at))
     };
-    // typedef multi_index<N(polls), poll> poll_table;
     typedef multi_index<N(polls), poll,
-        indexed_by< N(author), const_mem_fun<poll, account_name, &poll::get_post_id> >
+        indexed_by< N(post_id),
+            const_mem_fun<poll, account_name, &poll::by_post_id>
+        >
     > poll_table;
 };
 

@@ -19,7 +19,7 @@ void eosocial::write(const account_name author, const string content) {
     print(" ## post_id: ", post_id);
     print(" ## author: ", author);
 
-    post.emplace(author, [&](auto& data) {
+    post.emplace(0, [&](auto& data) {
         data.id = post_id;
         data.content = content;
         data.author = author;
@@ -62,23 +62,44 @@ void eosocial::remove(const uint64_t post_id) {
 }
 
 // @abi action vote
-void eosocial::vote(const uint64_t post_id, const account_name voter) {
+void eosocial::vote(const uint64_t post_id, const account_name voter, const string type) {
     poll_table poll(_self, _self);
-    require_auth(voter);
 
-    vote_id vote_index;
-    get_vote_id(vote_index);
-    uint64_t vote_id = vote_index.id++;
+    auto poll_index = poll.get_index<N(post_id)>();
 
-    poll.emplace(voter, [&](auto& data) {
-        data.id = vote_id;
-        data.post_id = post_id;
-        data.voter = voter;
-        data.voted_at = now();
-    });
+    auto poll_iter = poll_index.begin();
+    // while (poll_iter != poll_index.end() && poll_iter->post_id != post_id) {
+    //     poll_iter++;
+    // }
 
-    print("upvote post: ", post_id);
-    // print("downvote post: ", post_id);
+    eosio_assert(poll_iter != poll.end(), "Poll doesn't exist");
 
-    set_vote_id(vote_index);
+    if (poll_iter == poll_index.end()) {
+        vote_id vote_index;
+        get_vote_id(vote_index);
+        uint64_t vote_id = vote_index.id++;
+
+        poll.emplace(0, [&](auto& data) {
+            data.id = vote_id;
+            data.post_id = post_id;
+            data.voter = voter;
+            data.type = type;
+            data.voted_at = now();
+        });
+        print("Voted: ", post_id);
+
+        set_vote_id(vote_index);
+    } else if (poll_iter->voter == voter) {
+        require_auth(poll_iter->voter);
+
+        if (poll_iter->type == type) {
+            poll.erase(poll_iter);
+            print("Vote deleted: ", post_id);
+        } else {
+            poll.modify(poll_iter, 0, [&](auto& data) {
+                data.type = type;
+                data.voted_at = now();
+            });
+        }
+    }
 }

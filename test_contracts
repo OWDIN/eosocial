@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # unlock wallet
-docker exec nodeos /opt/eosio/bin/cleos --wallet-url http://localhost:8888 wallet unlock --password PW5JxTyzLMHDWnsuUW6mwDbmcnNLmZKs5BnYppNAsy9vDXPzpR4mF
+docker exec nodeos /opt/eosio/bin/cleos --wallet-url http://localhost:8888 wallet unlock --password PW5JDHjYnuhUp1nHSRJstRoq6uLAojhMQ1ecxtiLMfbKzd39a3p6A
 
 # regenerate abi
 rm contracts/eosocial/eosocial.abi
@@ -25,5 +25,5 @@ docker exec nodeos /opt/eosio/bin/cleos --wallet-url http://localhost:8888 set c
 #docker exec nodeos /opt/eosio/bin/cleos --wallet-url http://localhost:8888 --print-request --print-response push action eossocialapp update '{"post_id":"36"}' -p test1114test@active
 
 # vote
-docker exec nodeos /opt/eosio/bin/cleos --wallet-url http://localhost:8888 --print-request --print-response push action eossocialapp vote '{"post_id":"1", "voter": "test1114test"}' -p test1114test@active
+docker exec nodeos /opt/eosio/bin/cleos --wallet-url http://localhost:8888 --print-request --print-response push action eossocialapp vote '{"post_id":"1", "voter": "channproject"}' -p channproject@active
 
