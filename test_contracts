@@ -16,7 +16,7 @@ docker exec nodeos /opt/eosio/bin/cleos --wallet-url http://localhost:8888 set c
 
 # testcases
 ## write
-docker exec nodeos /opt/eosio/bin/cleos --wallet-url http://localhost:8888 --print-request --print-response push action eossocialapp write '{"author": "test1114test", "content": "test post"}' -p test1114test@active
+#docker exec nodeos /opt/eosio/bin/cleos --wallet-url http://localhost:8888 --print-request --print-response push action eossocialapp write '{"author": "test1114test", "content": "test post"}' -p test1114test@active
 
 ## update
 #docker exec nodeos /opt/eosio/bin/cleos --wallet-url http://localhost:8888 --print-request --print-response push action eossocialapp update '{"post_id":"36", "author": "test1114test", "content": "test post"}' -p test1114test@active
@@ -25,5 +25,5 @@ docker exec nodeos /opt/eosio/bin/cleos --wallet-url http://localhost:8888 --pri
 #docker exec nodeos /opt/eosio/bin/cleos --wallet-url http://localhost:8888 --print-request --print-response push action eossocialapp update '{"post_id":"36"}' -p test1114test@active
 
 # vote
-#docker exec nodeos /opt/eosio/bin/cleos --wallet-url http://localhost:8888 --print-request --print-response push action eossocialapp vote '{"post_id":"45", "voter": "test1114test"}' -p test1114test@active
+docker exec nodeos /opt/eosio/bin/cleos --wallet-url http://localhost:8888 --print-request --print-response push action eossocialapp vote '{"post_id":"1", "voter": "test1114test"}' -p test1114test@active
 

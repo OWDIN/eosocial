@@ -89,14 +89,7 @@ export async function login(accountName, privateKey) {
   return false
 }
 
-export async function createPost(accountName, privateKey, content) {
-  // const result = await EOS.transaction('eossocialapp', (eossocialapp) => {
-  //   eossocialapp.write({
-  //     author: accountName,
-  //     content,
-  //   }, { authorization: `${accountName}` })
-  // })
-
+export async function writePost(accountName, privateKey, content) {
   const contractConfig = {
     chainId: process.env.REACT_APP_EOSIO_CHAIN_ID,
     keyProvider: [
@@ -118,6 +111,47 @@ export async function createPost(accountName, privateKey, content) {
       data: {
         author: accountName,
         content,
+      },
+      authorization: [{
+        actor: accountName,
+        permission: 'active',
+      }],
+    }],
+  })
+
+  return result
+}
+
+export async function updatePost() {
+  // Work in Progress...
+}
+
+export async function removePost() {
+  // Work in Progress...
+}
+
+export async function votePost(accountName, privateKey, postId) {
+  const contractConfig = {
+    chainId: process.env.REACT_APP_EOSIO_CHAIN_ID,
+    keyProvider: [
+      privateKey,
+    ],
+    httpEndpoint: 'http://localhost:8888',
+    expireInSeconds: 60,
+    broadcast: true,
+    verbose: false, // true in dev
+    sign: true,
+  }
+
+  const contractEOS = eosjs(contractConfig)
+
+  const result = await contractEOS.transaction({
+    actions: [{
+      account: 'eossocialapp',
+      name: 'vote',
+      data: {
+        post_id: postId,
+        voter: accountName,
       },
       authorization: [{
         actor: accountName,
