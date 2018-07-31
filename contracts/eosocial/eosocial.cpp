@@ -57,7 +57,7 @@ void eosocial::remove(const uint64_t post_id) {
 
 // @abi action vote
 void eosocial::vote(const uint64_t post_id, const account_name voter, const string type) {
-    poll_table poll(_self, _self);
+    poll_table poll(_self, post_id);
 
     auto poll_iter = poll.begin();
     while (poll_iter != poll.end() && poll_iter->post_id != post_id) {

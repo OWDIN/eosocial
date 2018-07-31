@@ -24,7 +24,7 @@ export default class QuickSubmit extends React.Component {
     this.profile = this.props.profile
 
     this.state = {
-      content: new Date(),
+      content: '',
     }
   }
 
@@ -105,6 +105,7 @@ export default class QuickSubmit extends React.Component {
               // outline: 'none',
               // boxShadow: '0 0 !important',
             }}
+            value={this.state.content}
             onChange={this.handleInputChange}
             autosize='true'
           />
