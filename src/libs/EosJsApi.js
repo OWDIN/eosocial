@@ -1,12 +1,13 @@
 import eosjs from 'eosjs'
 import ecc from 'eosjs-ecc'
+import { ENDPOINT } from './api-config'
 
 const config = {
   chainId: process.env.REACT_APP_EOSIO_CHAIN_ID,
   keyProvider: [
     process.env.REACT_APP_EOSIO_EOSOCIAL_PRIVATE_KEY,
   ],
-  httpEndpoint: 'http://localhost:8888',
+  httpEndpoint: ENDPOINT,
   expireInSeconds: 60,
   broadcast: true,
   verbose: false, // true in dev

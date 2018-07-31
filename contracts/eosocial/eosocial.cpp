@@ -105,6 +105,4 @@ void eosocial::removevote(const uint64_t id) {
         poll.erase(poll_iter);
         print("Vote deleted.");
     }
-
-
 }
