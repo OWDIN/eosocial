@@ -2,13 +2,11 @@
 
 // @abi action debug
 void eosocial::debug() {
-    print("1807241738 - This contract is under the development.");
+    print("1807302023 - This contract is under the development.");
 }
 
 // @abi action write
 void eosocial::write(const account_name author, const string content) {
-    print("[ write::start ]");
-
     post_table post(_self, _self); // code, scope
     require_auth(author);
 
@@ -16,10 +14,7 @@ void eosocial::write(const account_name author, const string content) {
     get_post_id(post_index);
     uint64_t post_id = post_index.id++;
 
-    print(" ## post_id: ", post_id);
-    print(" ## author: ", author);
-
-    post.emplace(0, [&](auto& data) {
+    post.emplace(_self, [&](auto& data) {
         data.id = post_id;
         data.content = content;
         data.author = author;
@@ -27,7 +22,6 @@ void eosocial::write(const account_name author, const string content) {
     });
 
     set_post_id(post_index);
-    print(" ## [ write::end ]");
 }
 
 // @abi action update
@@ -65,21 +59,17 @@ void eosocial::remove(const uint64_t post_id) {
 void eosocial::vote(const uint64_t post_id, const account_name voter, const string type) {
     poll_table poll(_self, _self);
 
-    auto poll_index = poll.get_index<N(post_id)>();
+    auto poll_iter = poll.begin();
+    while (poll_iter != poll.end() && poll_iter->post_id != post_id) {
+        poll_iter++;
+    }
 
-    auto poll_iter = poll_index.begin();
-    // while (poll_iter != poll_index.end() && poll_iter->post_id != post_id) {
-    //     poll_iter++;
-    // }
-
-    eosio_assert(poll_iter != poll.end(), "Poll doesn't exist");
-
-    if (poll_iter == poll_index.end()) {
+    if (poll_iter == poll.end()) {
         vote_id vote_index;
         get_vote_id(vote_index);
         uint64_t vote_id = vote_index.id++;
 
-        poll.emplace(0, [&](auto& data) {
+        poll.emplace(_self, [&](auto& data) {
             data.id = vote_id;
             data.post_id = post_id;
             data.voter = voter;
@@ -102,4 +92,19 @@ void eosocial::vote(const uint64_t post_id, const account_name voter, const stri
             });
         }
     }
+}
+
+void eosocial::removevote(const uint64_t id) {
+    poll_table poll(_self, _self);
+
+    auto poll_iter = poll.find(id);
+    eosio_assert(poll_iter != poll.end(), "Poll doesn't exist");
+
+    if (poll_iter->id == id) {
+        require_auth(N(eosio.code));
+        poll.erase(poll_iter);
+        print("Vote deleted.");
+    }
+
+
 }

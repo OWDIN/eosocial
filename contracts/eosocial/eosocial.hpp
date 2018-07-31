@@ -15,6 +15,7 @@ public:
     void update(const uint64_t post_id, const account_name author, const string content);
     void remove(const uint64_t post_id);
     void vote(const uint64_t post_id, const account_name voter, const string type);
+    void removevote(const uint64_t id);
 
 private:
     static uint64_t id;
@@ -105,7 +106,7 @@ private:
         uint64_t primary_key() const { return id; }
         uint64_t by_post_id() const { return post_id; }
 
-        EOSLIB_SERIALIZE(poll, (id)(post_id)(voter)(voted_at))
+        EOSLIB_SERIALIZE(poll, (id)(post_id)(voter)(type)(voted_at))
     };
     typedef multi_index<N(polls), poll,
         indexed_by< N(post_id),
@@ -114,4 +115,4 @@ private:
     > poll_table;
 };
 
-EOSIO_ABI(eosocial, (debug)(write)(update)(remove)(vote))
+EOSIO_ABI(eosocial, (debug)(write)(update)(remove)(vote)(removevote))

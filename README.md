@@ -47,7 +47,9 @@ $ alias cleos_docker='docker exec nodeos /opt/eosio/bin/cleos --wallet-url http:
 # unlock wallet
 $ cleos_docker wallet create
 $ cleos_docker wallet unlock --password <WALLET_PASSWORD>
-$ cleos_docker wallet import 5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3
+
+# import nodeos key
+$ cleos_docker wallet import --private-key 5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3
 
 # create system accounts
 $ cleos_docker create account eosio eosio.bios EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV
@@ -143,7 +145,7 @@ Deploy smart contract:
 
 ```bash
 # import eossocialapp private key
-$ cleos_docker wallet import <DAPP_PRIVATE_KEY>
+$ cleos_docker wallet import --private-key <DAPP_PRIVATE_KEY>
 
 # send eosocial smart contract
 $ docker cp contracts/eosocial nodeos:/opt/eosio/bin/data-dir/contracts/
@@ -153,7 +155,7 @@ $ cleos_docker set contract eossocialapp /opt/eosio/bin/data-dir/contracts/eosoc
 
 # test smart contract
 ## write
-$ cleos_docker push action eossocialapp write '{"author": "{ACCOUNT_NAME}", "content": "first post"}' -p {ACCOUNT_NAME}
+# $ cleos_docker push action eossocialapp write '{"author": "{ACCOUNT_NAME}", "content": "first post"}' -p {ACCOUNT_NAME}
 ```
 
 Start React Project like below:
