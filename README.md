@@ -165,15 +165,13 @@ $ yarn start
 ```
 
 ## Contributing
-> WIP
-
-Please read [CONTRIBUTING](#WIP) for details on our code of conduct, and the process for submitting pull requests to us.
+Please read [CONTRIBUTING](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## Authors
 - CHANN - [@channprj](https://github.com/channprj)
 
 ## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
 
 ## Acknowledgments
 - EOSIO
