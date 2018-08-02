@@ -101,7 +101,8 @@ void eosocial::removevote(const uint64_t id) {
     eosio_assert(poll_iter != poll.end(), "Poll doesn't exist");
 
     if (poll_iter->id == id) {
-        require_auth(N(eosio.code));
+        // require_auth(N(eosio.code));
+        require_auth(_self);
         poll.erase(poll_iter);
         print("Vote deleted.");
     }

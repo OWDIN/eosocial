@@ -61,6 +61,18 @@ export async function getGlobalFeed(limit=100) {
   return data
 }
 
+export async function getVoteInfo(postId, limit=100) {
+  const data = await EOS.getTableRows({
+    code: 'eossocialapp',
+    scope: postId,
+    table: 'polls',
+    limit,
+    json: true,
+  })
+
+  return data
+}
+
 export async function login(accountName, privateKey) {
   const accountInfo = await EOS.getAccount(accountName)
   const accountActiveKeys = accountInfo.permissions[0].required_auth.keys

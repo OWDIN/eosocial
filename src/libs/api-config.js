@@ -3,10 +3,10 @@ let baseEndpoint = ''
 
 const hostname = window && window.location && window.location.hostname
 
-if (hostname === 'eosocial.app') {
-  baseEndpoint = 'https://eos.owdin.network'
-} else if (hostname === 'dev.eosocial.app') {
-  baseEndpoint = 'https://dev.eos.owdin.network'
+if (hostname === 'eosocial.owdin.network') {
+  baseEndpoint = 'https://eos.owdin.network:9999'
+// } else if (hostname === 'dev.eosocial.app') {
+//   baseEndpoint = 'https://dev.eos.owdin.network:9999'
 } else {
   baseEndpoint = process.env.REACT_APP_CHAIN_ENDPOINT || 'http://localhost:8888'
 }

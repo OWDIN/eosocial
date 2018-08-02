@@ -12,16 +12,55 @@ import moment from 'moment'
 export default class FeedItem extends React.Component {
   render() {
     const avatarURL = `https://avatars.dicebear.com/v2/identicon/${this.props.author}.svg`
+    let actionItems = []
+    const voting = this.props.voting
+    let upvote = 0
+    let downvote = 0
+    console.log(voting)
+
+    for (let index = 0; index < voting.length; index++) {
+      console.log(voting[index])
+      if (voting[index].type === 'up') {
+        upvote += 1
+      } else {
+        downvote += 1
+      }
+    }
+
+    if (this.props.auth) {
+      actionItems = [
+        (<span><Icon type='like-o' /> {upvote}</span>),
+        (<span><Icon type='dislike-o' /> {downvote}</span>),
+        (
+          <Tooltip title='Work in Progress...'>
+            <Icon type='message' disabled />
+          </Tooltip>
+        ),
+        (
+          <Tooltip title='Work in Progress...'>
+            <Icon type='ellipsis' disabled />
+          </Tooltip>
+        ),
+      ]
+    } else {
+      actionItems = [
+        (
+          <Tooltip title='Work in Progress...'>
+            <Icon type='message' disabled />
+          </Tooltip>
+        ),
+        (
+          <Tooltip title='Work in Progress...'>
+            <Icon type='ellipsis' disabled />
+          </Tooltip>
+        ),
+      ]
+    }
 
     return (
       <Card
         loading={this.props.loading}
         title={(
-          // <Meta
-          //   avatar={<Avatar shape='square' size='large' style={{ marginRight: '12px' }} src={avatarURL} />}
-          //   title={this.props.author}
-          //   description={moment.unix(this.props.createdAt).fromNow()}
-          // />
           <span>
             <Avatar shape='square' size='large' style={{ marginRight: '12px' }} src={avatarURL} />
             <b>{this.props.author}</b>
@@ -44,20 +83,7 @@ export default class FeedItem extends React.Component {
           border: '1px solid #e8e8e8',
           boxShadow: '0px 0px 2px 0px rgba(0, 0, 0, 0.2)',
         }}
-        actions={[
-          (<span><Icon type='like-o' /> 0</span>),
-          (<span><Icon type='dislike-o' /> 0</span>),
-          (
-            <Tooltip title='Work in Progress...'>
-              <Icon type='message' disabled />
-            </Tooltip>
-          ),
-          (
-            <Tooltip title='Work in Progress...'>
-              <Icon type='ellipsis' disabled />
-            </Tooltip>
-          ),
-        ]}
+        actions={actionItems}
       >
         {/* <h2>{this.props.title}</h2> */}
         <p>{this.props.content}</p>
@@ -67,10 +93,12 @@ export default class FeedItem extends React.Component {
 }
 
 FeedItem.defaultProps = {
-  loading: false,
   author: '',
   // title: '',
   content: '',
+  voting: '',
   createdAt: 0,
   updatedAt: 0,
+  loading: false,
+  auth: '',
 }
