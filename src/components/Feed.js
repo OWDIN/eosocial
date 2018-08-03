@@ -24,8 +24,8 @@ export default class Feed extends React.Component {
     this.fetch()
   }
 
-  fetch = () => {
-    getGlobalFeed().then((response) => {
+  fetch = async () => {
+    await getGlobalFeed().then((response) => {
       response.rows.map((data) => {
         data.key = data.id
         getVoteInfo(data.id).then((voteResponse) => {
@@ -38,7 +38,7 @@ export default class Feed extends React.Component {
       this.setState({
         loading: false,
         feedItems: response,
-      }, () => console.log(this.state))
+      })
     })
   }
 
@@ -48,8 +48,6 @@ export default class Feed extends React.Component {
 
     if (items !== '') {
       feed = items.reverse().map((item) => {
-        console.log('vote: ', item.voting)
-        console.log(item)
         return (
           <FeedItem
             key={item.key}

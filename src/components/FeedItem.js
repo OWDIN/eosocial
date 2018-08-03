@@ -16,7 +16,6 @@ export default class FeedItem extends React.Component {
     const voting = this.props.voting
     let upvote = 0
     let downvote = 0
-    console.log(voting)
 
     for (let index = 0; index < voting.length; index++) {
       console.log(voting[index])
