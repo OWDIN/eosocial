@@ -1,6 +1,9 @@
 import eosjs from 'eosjs'
 import ecc from 'eosjs-ecc'
-import { ENDPOINT } from './api-config'
+import {
+  DAPP_ACCOUNT,
+  ENDPOINT,
+} from './api-config'
 
 const config = {
   chainId: process.env.REACT_APP_EOSIO_CHAIN_ID,
@@ -19,20 +22,20 @@ const EOS = eosjs(config)
 export async function createAccount(accountName, publicKey) {
   let result = await EOS.transaction((transaction) => {
     transaction.newaccount({
-      creator: 'eossocialapp',
+      creator: DAPP_ACCOUNT,
       name: accountName,
       owner: publicKey,
       active: publicKey,
     })
 
     transaction.buyrambytes({
-      payer: 'eossocialapp',
+      payer: DAPP_ACCOUNT,
       receiver: accountName,
       bytes: 8192,
     })
 
     transaction.delegatebw({
-      from: 'eossocialapp',
+      from: DAPP_ACCOUNT,
       receiver: accountName,
       stake_net_quantity: '10.0000 SYS',
       stake_cpu_quantity: '10.0000 SYS',
@@ -55,8 +58,8 @@ export function validPublic(key) {
 
 export async function getGlobalFeed(limit=100) {
   const data = await EOS.getTableRows({
-    code: 'eossocialapp',
-    scope: 'eossocialapp',
+    code: DAPP_ACCOUNT,
+    scope: DAPP_ACCOUNT,
     table: 'posts',
     limit,
     json: true,
@@ -67,7 +70,7 @@ export async function getGlobalFeed(limit=100) {
 
 export async function getVoteInfo(postId, limit=100) {
   const data = await EOS.getTableRows({
-    code: 'eossocialapp',
+    code: DAPP_ACCOUNT,
     scope: postId,
     table: 'polls',
     limit,
@@ -123,7 +126,7 @@ export async function writePost(accountName, privateKey, content) {
 
   let result = await contractEOS.transaction({
     actions: [{
-      account: 'eossocialapp',
+      account: DAPP_ACCOUNT,
       name: 'write',
       data: {
         author: accountName,
@@ -164,9 +167,10 @@ export async function votePost(accountName, privateKey, postId, voteType) {
 
   const contractEOS = eosjs(contractConfig)
 
-  let result = await contractEOS.transaction({
+  let result = false
+  const voteResponse = await contractEOS.transaction({
     actions: [{
-      account: 'eossocialapp',
+      account: DAPP_ACCOUNT,
       name: 'vote',
       data: {
         post_id: postId,
@@ -181,6 +185,11 @@ export async function votePost(accountName, privateKey, postId, voteType) {
   }).catch(() => {
     result = false
   })
+
+  result = {
+    type: voteType,
+    data: voteResponse,
+  }
 
   return result
 }

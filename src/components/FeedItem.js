@@ -3,6 +3,7 @@ import {
   Avatar,
   Card,
   Icon,
+  Modal,
   Tooltip,
   message,
 } from 'antd'
@@ -30,16 +31,41 @@ export default class FeedItem extends React.Component {
     }
   }
 
-  componentDidMount(props) {
-    this.fetch(props)
+  componentDidMount() {
+    this.fetch()
   }
 
   handleVote = async (postId, type) => {
-    if (await votePost(this.props.username, this.props.privateKey, postId, type)) {
-      message.success('Successfully voted.', 5)
+    const voted = await votePost(
+      this.props.profile.username,
+      this.props.profile.privateKey,
+      postId,
+      type,
+    )
+
+    if (voted) {
+      this.handleModal(
+        'success',
+        'Executed eossocialapp:action:write()',
+        JSON.stringify(voted),
+      )
+
+      this.fetch()
     } else {
       message.error('Failed to vote.', 5)
     }
+  }
+
+  handleModal = (type, title, content) => {
+    Modal[type]({
+      title,
+      content,
+      // content: (
+      //   <Highlight language='json'>
+      //     {content}
+      //   </Highlight>
+      // ),
+    })
   }
 
   fetch = () => {
@@ -75,7 +101,14 @@ export default class FeedItem extends React.Component {
             <Icon type='like-o' /> {upvote}
           </span>
         ),
-        (<span><Icon type='dislike-o' /> {downvote}</span>),
+        (
+          <span
+            onClick={() => this.handleVote(this.props.id, 'down')}
+            role='presentation'
+          >
+            <Icon type='dislike-o' /> {downvote}
+          </span>
+        ),
         (
           <Tooltip title='Work in Progress...'>
             <Icon type='message' disabled />
