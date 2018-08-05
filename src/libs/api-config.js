@@ -5,7 +5,7 @@ export const apiVersion = 'v1'
 
 const hostname = window && window.location && window.location.hostname
 if (hostname === 'eosocial.owdin.network') {
-  baseEndpoint = process.env.CHAIN_ENDPOINT || 'http://jungle.cryptolions.io:18888'
+  baseEndpoint = process.env.CHAIN_ENDPOINT || 'https://api.jungle.alohaeos.com'
   account = process.env.ACCOUNT || 'eossocialapp'
 } else {
   baseEndpoint = process.env.CHAIN_ENDPOINT || 'http://localhost:8888'
