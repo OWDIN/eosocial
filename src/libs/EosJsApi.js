@@ -5,6 +5,7 @@ import {
   DAPP_ACCOUNT,
   DAPP_PRIVATE_KEY,
   ENDPOINT,
+  DEFAULT_SYMBOL,
 } from './api-config'
 
 const config = {
@@ -39,8 +40,8 @@ export async function createAccount(accountName, publicKey) {
     transaction.delegatebw({
       from: DAPP_ACCOUNT,
       receiver: accountName,
-      stake_net_quantity: '10.0000 SYS',
-      stake_cpu_quantity: '10.0000 SYS',
+      stake_net_quantity: `10.0000 ${DEFAULT_SYMBOL}`,
+      stake_cpu_quantity: `10.0000 ${DEFAULT_SYMBOL}`,
       transfer: 0,
     })
   }).catch(() => {

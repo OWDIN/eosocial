@@ -16,6 +16,7 @@ export const ENDPOINT = baseEndpoint
 export const CHAIN_ID = process.env.CHAIN_ID || ''
 export const DAPP_ACCOUNT = account
 export const DAPP_PRIVATE_KEY = process.env.ACTIVE_PRIVATE_KEY
+export const DEFAULT_SYMBOL = process.env.DEFAULT_SYMBOL || 'SYS'
 
 console.table(process.env)
 export default ENDPOINT
