@@ -6,14 +6,47 @@ import {
   Tooltip,
 } from 'antd'
 import moment from 'moment'
+import {
+  getVoteInfo,
+} from '../libs/EosJsApi'
 
 // const { Meta } = Card
 
 export default class FeedItem extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      id: this.props.id,
+      author: this.props.author,
+      // title: this.props.title,
+      content: this.props.content,
+      voting: this.props.voting,
+      createdAt: this.props.createdAt,
+      updatedAt: this.props.updatedAt,
+      // loading: this.props.loading,
+      // auth: this.props.auth,
+    }
+  }
+
+  componentDidMount(props) {
+    this.fetch(props)
+  }
+
+  fetch = () => {
+    getVoteInfo(this.state.id).then((voteResponse) => {
+      console.log(`id#${this.state.id}`)
+      console.log(voteResponse)
+      this.setState({
+        voting: voteResponse.rows,
+      })
+    })
+  }
+
   render() {
     const avatarURL = `https://avatars.dicebear.com/v2/identicon/${this.props.author}.svg`
     let actionItems = []
-    const voting = this.props.voting
+    const voting = this.state.voting
     let upvote = 0
     let downvote = 0
 
@@ -58,11 +91,12 @@ export default class FeedItem extends React.Component {
 
     return (
       <Card
+        id={`card-${this.state.id}`}
         loading={this.props.loading}
         title={(
           <span>
             <Avatar shape='square' size='large' style={{ marginRight: '12px' }} src={avatarURL} />
-            <b>{this.props.author}</b>
+            <b>{this.state.author}</b>
             <span
               style={{
                 color: '#ccc',
@@ -70,7 +104,8 @@ export default class FeedItem extends React.Component {
                 fontWeight: 'normal',
               }}
             >
-              &nbsp;- {moment.unix(this.props.createdAt).fromNow()}
+              &nbsp;- {
+                (this.state.updatedAt) ? moment.unix(this.state.updatedAt).fromNow() : moment.unix(this.state.createdAt).fromNow()}
             </span>
           </span>
         )}
@@ -84,8 +119,8 @@ export default class FeedItem extends React.Component {
         }}
         actions={actionItems}
       >
-        {/* <h2>{this.props.title}</h2> */}
-        <p>{this.props.content}</p>
+        {/* <h2>{this.state.title}</h2> */}
+        <p>{this.state.content}</p>
       </Card>
     )
   }

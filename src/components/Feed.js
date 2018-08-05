@@ -4,7 +4,6 @@ import QuickSubmit from './QuickSubmit'
 import FeedItem from './FeedItem'
 import {
   getGlobalFeed,
-  getVoteInfo,
 } from '../libs/EosJsApi'
 
 export default class Feed extends React.Component {
@@ -28,9 +27,6 @@ export default class Feed extends React.Component {
     await getGlobalFeed().then((response) => {
       response.rows.map((data) => {
         data.key = data.id
-        getVoteInfo(data.id).then((voteResponse) => {
-          data.voting = voteResponse.rows
-        })
 
         return data
       })
@@ -51,6 +47,7 @@ export default class Feed extends React.Component {
         return (
           <FeedItem
             key={item.key}
+            id={item.id}
             author={item.author}
             content={item.content}
             voting={item.voting}
