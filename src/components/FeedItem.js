@@ -35,8 +35,6 @@ export default class FeedItem extends React.Component {
 
   fetch = () => {
     getVoteInfo(this.state.id).then((voteResponse) => {
-      console.log(`id#${this.state.id}`)
-      console.log(voteResponse)
       this.setState({
         voting: voteResponse.rows,
       })
@@ -51,7 +49,6 @@ export default class FeedItem extends React.Component {
     let downvote = 0
 
     for (let index = 0; index < voting.length; index++) {
-      console.log(voting[index])
       if (voting[index].type === 'up') {
         upvote += 1
       } else {
@@ -104,8 +101,11 @@ export default class FeedItem extends React.Component {
                 fontWeight: 'normal',
               }}
             >
-              &nbsp;- {
-                (this.state.updatedAt) ? moment.unix(this.state.updatedAt).fromNow() : moment.unix(this.state.createdAt).fromNow()}
+              {
+                (this.state.updatedAt)
+                  ? ` - ${moment.unix(this.state.updatedAt).fromNow()} (Updated)`
+                  : ` - ${moment.unix(this.state.createdAt).fromNow()}`
+              }
             </span>
           </span>
         )}
