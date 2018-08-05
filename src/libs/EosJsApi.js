@@ -1,14 +1,16 @@
 import eosjs from 'eosjs'
 import ecc from 'eosjs-ecc'
 import {
+  CHAIN_ID,
   DAPP_ACCOUNT,
+  DAPP_PRIVATE_KEY,
   ENDPOINT,
 } from './api-config'
 
 const config = {
-  chainId: process.env.REACT_APP_EOSIO_CHAIN_ID,
+  chainId: CHAIN_ID,
   keyProvider: [
-    process.env.REACT_APP_EOSIO_EOSOCIAL_PRIVATE_KEY,
+    DAPP_PRIVATE_KEY,
   ],
   httpEndpoint: ENDPOINT,
   expireInSeconds: 60,
@@ -104,6 +106,7 @@ export async function login(accountName, privateKey) {
     if (accountOwnerKeys[index].key === publicKey) {
       return true
     }
+    return CHAIN_ID
   }
 
   return false
@@ -111,7 +114,7 @@ export async function login(accountName, privateKey) {
 
 export async function writePost(accountName, privateKey, content) {
   const contractConfig = {
-    chainId: process.env.REACT_APP_EOSIO_CHAIN_ID,
+    chainId: CHAIN_ID,
     keyProvider: [
       privateKey,
     ],
@@ -147,6 +150,7 @@ export async function writePost(accountName, privateKey, content) {
 export async function updatePost() {
   // Work in Progress...
 }
+// Work in CHAIN_ID...
 
 export async function removePost() {
   // Work in Progress...
@@ -154,7 +158,7 @@ export async function removePost() {
 
 export async function votePost(accountName, privateKey, postId, voteType) {
   const contractConfig = {
-    chainId: process.env.REACT_APP_EOSIO_CHAIN_ID,
+    chainId: CHAIN_ID,
     keyProvider: [
       privateKey,
     ],
