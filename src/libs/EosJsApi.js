@@ -16,8 +16,8 @@ const config = {
 
 const EOS = eosjs(config)
 
-export function createAccount(accountName, publicKey) {
-  return EOS.transaction((transaction) => {
+export async function createAccount(accountName, publicKey) {
+  let result = await EOS.transaction((transaction) => {
     transaction.newaccount({
       creator: 'eossocialapp',
       name: accountName,
@@ -38,7 +38,11 @@ export function createAccount(accountName, publicKey) {
       stake_cpu_quantity: '10.0000 SYS',
       transfer: 0,
     })
+  }).catch(() => {
+    result = false
   })
+
+  return result
 }
 
 export function validPrivate(key) {
@@ -117,7 +121,7 @@ export async function writePost(accountName, privateKey, content) {
 
   const contractEOS = eosjs(contractConfig)
 
-  const result = await contractEOS.transaction({
+  let result = await contractEOS.transaction({
     actions: [{
       account: 'eossocialapp',
       name: 'write',
@@ -130,6 +134,8 @@ export async function writePost(accountName, privateKey, content) {
         permission: 'active',
       }],
     }],
+  }).catch(() => {
+    result = false
   })
 
   return result
@@ -158,7 +164,7 @@ export async function votePost(accountName, privateKey, postId, voteType) {
 
   const contractEOS = eosjs(contractConfig)
 
-  const result = await contractEOS.transaction({
+  let result = await contractEOS.transaction({
     actions: [{
       account: 'eossocialapp',
       name: 'vote',
@@ -172,6 +178,8 @@ export async function votePost(accountName, privateKey, postId, voteType) {
         permission: 'active',
       }],
     }],
+  }).catch(() => {
+    result = false
   })
 
   return result

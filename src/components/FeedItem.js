@@ -4,10 +4,12 @@ import {
   Card,
   Icon,
   Tooltip,
+  message,
 } from 'antd'
 import moment from 'moment'
 import {
   getVoteInfo,
+  votePost,
 } from '../libs/EosJsApi'
 
 // const { Meta } = Card
@@ -25,12 +27,19 @@ export default class FeedItem extends React.Component {
       createdAt: this.props.createdAt,
       updatedAt: this.props.updatedAt,
       // loading: this.props.loading,
-      // auth: this.props.auth,
     }
   }
 
   componentDidMount(props) {
     this.fetch(props)
+  }
+
+  handleVote = async (postId, type) => {
+    if (await votePost(this.props.username, this.props.privateKey, postId, type)) {
+      message.success('Successfully voted.', 5)
+    } else {
+      message.error('Failed to vote.', 5)
+    }
   }
 
   fetch = () => {
@@ -58,7 +67,14 @@ export default class FeedItem extends React.Component {
 
     if (this.props.auth) {
       actionItems = [
-        (<span><Icon type='like-o' /> {upvote}</span>),
+        (
+          <span
+            onClick={() => this.handleVote(this.props.id, 'up')}
+            role='presentation'
+          >
+            <Icon type='like-o' /> {upvote}
+          </span>
+        ),
         (<span><Icon type='dislike-o' /> {downvote}</span>),
         (
           <Tooltip title='Work in Progress...'>
@@ -135,4 +151,5 @@ FeedItem.defaultProps = {
   updatedAt: 0,
   loading: true,
   auth: '',
+  profile: '',
 }

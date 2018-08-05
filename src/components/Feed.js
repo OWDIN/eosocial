@@ -10,9 +10,6 @@ export default class Feed extends React.Component {
   constructor(props) {
     super(props)
 
-    this.auth = this.props.auth
-    this.profile = this.props.profile
-
     this.state = {
       loading: true,
       feedItems: [],
@@ -55,6 +52,7 @@ export default class Feed extends React.Component {
             updatedAt={item.updated_at}
             loading={this.state.loading}
             auth={this.props.auth}
+            profile={this.props.profile}
           />
         )
       })
