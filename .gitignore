@@ -12,6 +12,7 @@
 
 # misc
 .vscode
+replacements.txt
 .env.local
 .env.development.local
 .env.test.local
