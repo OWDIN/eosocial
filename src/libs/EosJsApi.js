@@ -108,7 +108,7 @@ export async function writePost(accountName, privateKey, content) {
     keyProvider: [
       privateKey,
     ],
-    httpEndpoint: 'http://localhost:8888',
+    httpEndpoint: ENDPOINT,
     expireInSeconds: 60,
     broadcast: true,
     verbose: false, // true in dev
@@ -143,13 +143,13 @@ export async function removePost() {
   // Work in Progress...
 }
 
-export async function votePost(accountName, privateKey, postId) {
+export async function votePost(accountName, privateKey, postId, voteType) {
   const contractConfig = {
     chainId: process.env.REACT_APP_EOSIO_CHAIN_ID,
     keyProvider: [
       privateKey,
     ],
-    httpEndpoint: 'http://localhost:8888',
+    httpEndpoint: ENDPOINT,
     expireInSeconds: 60,
     broadcast: true,
     verbose: false, // true in dev
@@ -165,6 +165,7 @@ export async function votePost(accountName, privateKey, postId) {
       data: {
         post_id: postId,
         voter: accountName,
+        type: voteType,
       },
       authorization: [{
         actor: accountName,

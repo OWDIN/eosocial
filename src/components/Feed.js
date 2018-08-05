@@ -58,6 +58,13 @@ export default class Feed extends React.Component {
           />
         )
       })
+    } else {
+      feed = (
+        <div>
+          <FeedItem />
+          <span>No items found.</span>
+        </div>
+      )
     }
 
     return (

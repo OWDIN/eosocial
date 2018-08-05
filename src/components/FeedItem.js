@@ -133,6 +133,6 @@ FeedItem.defaultProps = {
   voting: '',
   createdAt: 0,
   updatedAt: 0,
-  loading: false,
+  loading: true,
   auth: '',
 }

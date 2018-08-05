@@ -60,7 +60,7 @@ void eosocial::vote(const uint64_t post_id, const account_name voter, const stri
     poll_table poll(_self, post_id);
 
     auto poll_iter = poll.begin();
-    while (poll_iter != poll.end() && poll_iter->post_id != post_id) {
+    while (poll_iter != poll.end() && poll_iter->voter != voter) {
         poll_iter++;
     }
 
@@ -79,7 +79,7 @@ void eosocial::vote(const uint64_t post_id, const account_name voter, const stri
         print("Voted: ", post_id);
 
         set_vote_id(vote_index);
-    } else if (poll_iter->voter == voter) {
+    } else {
         require_auth(poll_iter->voter);
 
         if (poll_iter->type == type) {
