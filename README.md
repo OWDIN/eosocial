@@ -1,14 +1,14 @@
 ![readme-banner](https://user-images.githubusercontent.com/1831308/43113852-1bcf3c50-8f37-11e8-8e8d-d38d064ddbe9.png)
 
 # EOSocial
-> Work in Progress...
+EOSocial is votable social sample dApp run by EOS Testnet. You can see how dApp works. Play with it! 😊
 
-EOSocial is votable social sample dApp run by EOS Testnet. You can see how dApp works.
-
-**Disclaimer: 1) This is sample dApp running on local Testnet. You have to use carefully if you're use it with your Mainnet keys. 2) Change contract account private/public key when you're deploy somewhere.**
+_**Disclaimer:** 1) This is sample dApp running on local Testnet. You have to use carefully if you're use it with your Mainnet keys. 2) Change contract account private/public key when you're deploy somewhere._
 
 ## Getting Started
-These instructions will get you project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live machine.
+These instructions will get you project up and running on your local machine for development and testing purposes.
+
+If you want to deploy on public network(Junglenet, Mainnet, etc), you have to edit configurations.
 
 ### Requirements
 EOSocial can run on virtually all platforms where Docker can (macOS, Linux, etc.).
