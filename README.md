@@ -158,7 +158,9 @@ $ cleos_docker set contract eossocialapp /opt/eosio/bin/data-dir/contracts/eosoc
 # $ cleos_docker push action eossocialapp write '{"author": "{ACCOUNT_NAME}", "content": "first post"}' -p {ACCOUNT_NAME}
 ```
 
-Edit `<DAPP_PRIVATE_KEY>` in **api-config.js**, and start react project like below:
+Edit `<DAPP_PRIVATE_KEY>` in **src/libs/api-config.js** or add  **.env** file with `REACT_APP_ACTIVE_PRIVATE_KEY='<DAPP_PRIVATE_KEY>'`
+
+Start dapp like below:
 
 ```bash
 $ yarn start-local
