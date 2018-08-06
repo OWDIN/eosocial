@@ -15,7 +15,7 @@ if (hostname === 'eosocial.owdin.network') {
 }
 const ENDPOINT = baseEndpoint
 
-const PORT = process.env.MIDDLEWARE_PORT || 5000
+const PORT = process.env.PORT || 5000
 const CHAIN_ID = process.env.CHAIN_ID || ''
 const DAPP_ACCOUNT = account
 const DAPP_PRIVATE_KEY = process.env.ACTIVE_PRIVATE_KEY || '<YOUR-DAPP-PRIVATE-KEY-FOR-TEST>'
@@ -46,7 +46,7 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../build')))
 
   // handle react-router and return all requests to react app
-  app.get('*', function(req, res) {
+  app.get('/*', function(req, res) {
     res.sendFile(path.join(__dirname, '../build', 'index.html'))
   })
 }
