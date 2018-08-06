@@ -169,7 +169,7 @@ export default class LoginForm extends React.Component {
               >
                 <Input
                   name='privateKey'
-                  placeholder='Private Key'
+                  placeholder='Private Key (Active)'
                   size='large'
                   onChange={this.handleInputChange}
                   value={this.state.privateKey}

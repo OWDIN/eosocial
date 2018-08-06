@@ -22,13 +22,13 @@ const config = {
 
 const EOS = eosjs(config)
 
-export async function createAccount(accountName, publicKey) {
+export async function createAccount(accountName, ownerKey, activeKey) {
   let result = await EOS.transaction((transaction) => {
     transaction.newaccount({
       creator: DAPP_ACCOUNT,
       name: accountName,
-      owner: publicKey,
-      active: publicKey,
+      owner: ownerKey,
+      active: activeKey,
     })
 
     transaction.buyrambytes({

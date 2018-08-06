@@ -30,7 +30,7 @@ export default class CreateAccount extends React.Component {
 
   handleClick = async () => {
     this.setState({ loading: true })
-    if (await createAccount(this.state.username, this.state.ownerKey)) {
+    if (await createAccount(this.state.username, this.state.ownerKey, this.state.activeKey)) {
       message.success('Successfully created account.', 5)
 
       this.setState({
@@ -92,7 +92,7 @@ export default class CreateAccount extends React.Component {
       break
 
     case 'activeKey':
-      if (validPublic(this.state.ownerKey) === true && this.state.ownerKey.length === 53) {
+      if (validPublic(this.state.activeKey) === true && this.state.activeKey.length === 53) {
         this.setState({
           [field]: {
             validateStatus: 'success',
