@@ -60,7 +60,6 @@ export default class QuickSubmit extends React.Component {
 
   handleSubmit = async () => {
     const result = await writePost(this.props.profile.username, this.props.profile.privateKey, this.state.content)
-    console.log(result)
 
     this.handleModal(
       'success',

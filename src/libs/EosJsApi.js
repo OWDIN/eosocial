@@ -19,7 +19,6 @@ const config = {
   verbose: false, // true in dev
   sign: true,
 }
-
 const EOS = eosjs(config)
 
 export async function createAccount(accountName, ownerKey, activeKey) {
@@ -93,7 +92,6 @@ export async function login(accountName, privateKey) {
   try {
     publicKey = ecc.privateToPublic(privateKey)
   } catch (error) {
-    console.log(error)
     return false
   }
 

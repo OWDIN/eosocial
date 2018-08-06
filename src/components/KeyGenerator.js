@@ -70,7 +70,7 @@ export default class KeyGenerator extends React.Component {
           <Card
             title='Key Generator'
           >
-            <Form onSubmit={() => console.log('[submit]')}>
+            <Form>
               <FormItem
                 {...formItemLayout}
                 label='Master Key'
