@@ -1,11 +1,23 @@
 {
   "name": "eosocial",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "engines": {
-    "node": ">=10.6.0",
+    "node": ">=8.11.x",
     "npm": ">=6.1.0"
   },
+  "scripts": {
+    "build-css": "node-sass-chokidar src/ -o src/",
+    "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
+    "start-js": "react-scripts start",
+    "start-local": "npm-run-all -p watch-css start-js",
+    "start": "node middleware/server.js",
+    "heroku-prebuild": "yarn install && yarn run build",
+    "build-js": "react-scripts build",
+    "build": "npm-run-all build-css build-js",
+    "test": "react-app-rewired test --env=jsdom"
+  },
+  "proxy": "http://localhost:5000",
   "dependencies": {
     "antd": "^3.6.6",
     "eosjs": "^15.0.3",
@@ -27,17 +39,6 @@
     "react-scripts": "1.1.4",
     "redux-saga": "^0.16.0",
     "speed-test": "^2.0.0"
-  },
-  "scripts": {
-    "build-css": "node-sass-chokidar src/ -o src/",
-    "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
-    "start-js": "react-scripts start",
-    "start-local": "npm-run-all -p watch-css start-js",
-    "start": "node middleware/server.js",
-    "heroku-postbuild": "npm install && npm run build",
-    "build-js": "react-scripts build",
-    "build": "npm-run-all build-css build-js",
-    "test": "react-app-rewired test --env=jsdom"
   },
   "devDependencies": {
     "babel-plugin-import": "^1.8.0",
