@@ -11,6 +11,7 @@
     "eosjs": "^15.0.3",
     "eosjs-ecc": "^4.0.2",
     "eosjs-keygen": "^1.3.2",
+    "expressjs": "^1.0.1",
     "glamor": "^2.20.40",
     "glamorous": "^4.13.1",
     "moment": "^2.22.2",
@@ -31,7 +32,9 @@
     "build-css": "node-sass-chokidar src/ -o src/",
     "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
     "start-js": "react-scripts start",
-    "start": "npm-run-all -p watch-css start-js",
+    "start-local": "npm-run-all -p watch-css start-js",
+    "start": "node middleware/server.js",
+    "heroku-postbuild": "npm install && npm run build",
     "build-js": "react-scripts build",
     "build": "npm-run-all build-css build-js",
     "test": "react-app-rewired test --env=jsdom"

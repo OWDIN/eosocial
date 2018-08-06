@@ -17,7 +17,7 @@ EOSocial can run on virtually all platforms where Docker can (macOS, Linux, etc.
 - Node **8.0.x** or higher
   - NPM or Yarn
 
-### Installation
+### Deploy on Local
 Run nodeos container locally.
 
 ```bash
@@ -158,11 +158,14 @@ $ cleos_docker set contract eossocialapp /opt/eosio/bin/data-dir/contracts/eosoc
 # $ cleos_docker push action eossocialapp write '{"author": "{ACCOUNT_NAME}", "content": "first post"}' -p {ACCOUNT_NAME}
 ```
 
-Start React Project like below:
+Edit `<DAPP_PRIVATE_KEY>` in **api-config.js**, and start react project like below:
 
 ```bash
-$ yarn start
+$ yarn start-local
 ```
+
+### Deploy on Heroku
+> Work in Progress...
 
 ## Contributing
 Please read [CONTRIBUTING](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
@@ -179,3 +182,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## References
 - [EOSIO Developer Portal](https://developers.eos.io/)
 - [EOSDocs](https://www.eosdocs.io/)
+- [EOS Jungle Testnet Monitor](http://jungle.cryptolions.io/)
+- [EOS Endpoints Report](https://validate.eosnation.io/reports/endpoints.html)
