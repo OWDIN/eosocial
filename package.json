@@ -1,6 +1,7 @@
 {
   "name": "eosocial",
   "version": "0.1.1",
+  "homepage" : "https://github.com/owdin/eosocial",
   "private": true,
   "engines": {
     "node": ">=8.11.x",
@@ -11,7 +12,7 @@
     "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
     "start-js": "react-scripts start",
     "start-local": "npm-run-all -p watch-css start-js",
-    "start": "node middleware/server.js",
+    "start": "NODE_ENV=production node middleware/server.js",
     "heroku-prebuild": "yarn install && yarn run build",
     "build-js": "react-scripts build",
     "build": "npm-run-all build-css build-js",
