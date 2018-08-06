@@ -22,30 +22,50 @@ const config = {
 const EOS = eosjs(config)
 
 export async function createAccount(accountName, ownerKey, activeKey) {
-  let result = await EOS.transaction((transaction) => {
-    transaction.newaccount({
-      creator: DAPP_ACCOUNT,
-      name: accountName,
-      owner: ownerKey,
-      active: activeKey,
+  // for local testnet
+  const hostname = window && window.location && window.location.hostname
+  if (hostname !== 'eosocial.owdin.network') {
+    let result = await EOS.transaction((transaction) => {
+      transaction.newaccount({
+        creator: DAPP_ACCOUNT,
+        name: accountName,
+        owner: ownerKey,
+        active: activeKey,
+      })
+
+      transaction.buyrambytes({
+        payer: DAPP_ACCOUNT,
+        receiver: accountName,
+        bytes: 8192,
+      })
+
+      transaction.delegatebw({
+        from: DAPP_ACCOUNT,
+        receiver: accountName,
+        stake_net_quantity: `10.0000 ${DEFAULT_SYMBOL}`,
+        stake_cpu_quantity: `10.0000 ${DEFAULT_SYMBOL}`,
+        transfer: 0,
+      })
+    }).catch(() => {
+      result = false
     })
 
-    transaction.buyrambytes({
-      payer: DAPP_ACCOUNT,
-      receiver: accountName,
-      bytes: 8192,
-    })
+    return result
+  }
 
-    transaction.delegatebw({
-      from: DAPP_ACCOUNT,
-      receiver: accountName,
-      stake_net_quantity: `10.0000 ${DEFAULT_SYMBOL}`,
-      stake_cpu_quantity: `10.0000 ${DEFAULT_SYMBOL}`,
-      transfer: 0,
-    })
-  }).catch(() => {
-    result = false
+  // for public testnet
+  const rawResponse = await fetch('/v1/signup', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      accountName,
+      ownerKey,
+      activeKey,
+    }),
   })
+  const result = await rawResponse.json()
 
   return result
 }
