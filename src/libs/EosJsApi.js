@@ -125,7 +125,6 @@ export async function login(accountName, privateKey) {
     if (accountOwnerKeys[index].key === publicKey) {
       return true
     }
-    return CHAIN_ID
   }
 
   return false
@@ -169,7 +168,6 @@ export async function writePost(accountName, privateKey, content) {
 export async function updatePost() {
   // Work in Progress...
 }
-// Work in CHAIN_ID...
 
 export async function removePost() {
   // Work in Progress...

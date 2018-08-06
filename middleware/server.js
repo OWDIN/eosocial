@@ -25,7 +25,7 @@ const PORT = process.env.PORT || 5000
 const CHAIN_ID = chainId
 const DAPP_ACCOUNT = account
 const DAPP_PRIVATE_KEY = process.env.ACTIVE_PRIVATE_KEY
-  || '<YOUR-DAPP-PRIVATE-KEY-FOR-TEST>'
+  || '<YOUR_DAPP_PRIVATE_KEY_FOR_TEST>'
 const DEFAULT_SYMBOL = process.env.DEFAULT_SYMBOL || 'SYS'
 
 const config = {

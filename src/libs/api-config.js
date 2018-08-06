@@ -18,7 +18,7 @@ export const CHAIN_ID = process.env.REACT_APP_CHAIN_ID
 export const DAPP_ACCOUNT = account
 export const DAPP_PRIVATE_KEY = process.env.ACTIVE_PRIVATE_KEY
   || process.env.REACT_APP_ACTIVE_PRIVATE_KEY
-  || '<YOUR-DAPP-PRIVATE-KEY-FOR-TEST>'
+  || '<YOUR_DAPP_PRIVATE_KEY_FOR_TEST>'
 export const DEFAULT_SYMBOL = process.env.DEFAULT_SYMBOL || 'SYS'
 
 export default ENDPOINT
