@@ -1,7 +1,7 @@
 {
   "name": "eosocial",
   "version": "0.1.1",
-  "homepage" : "https://github.com/owdin/eosocial",
+  "homepage" : "https://eosocial.owdin.network",
   "private": true,
   "engines": {
     "node": ">=8.11.3",
